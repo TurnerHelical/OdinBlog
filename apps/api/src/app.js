@@ -1,15 +1,11 @@
 import express from "express";
-
+import indexRouter from './routes/index.js';
 
 const app = express();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-app.use('/', () => {
-    console.log('Working');
-});
+app.use('/', indexRouter);
 
-app.listen(3001, () => {
-    console.log('running')
-})
+export default app;
