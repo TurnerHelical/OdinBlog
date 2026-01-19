@@ -1,8 +1,8 @@
 import { Router } from 'express';
-import home from '../routes/homeRoutes.js';
+import posts from './blogRoutes.js';
 
 const router = Router();
 
-router.use('/', home);
+router.use('/posts', posts);
 
 export default router;
