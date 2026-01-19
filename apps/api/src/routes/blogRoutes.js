@@ -11,6 +11,8 @@ router.get('/drafts', controller.getMyDrafts);
 router.get('/:postId', controller.getBlogPostById);
 router.patch('/:postId', controller.updateBlogPost);
 router.delete('/:postId', controller.deleteBlogPost);
+router.get('/:postId/comments', controller.getAllCommentsOnPost);
+router.post('/:postId/comments', controller.newComment);
 
 
 
