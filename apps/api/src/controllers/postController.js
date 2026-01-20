@@ -20,7 +20,11 @@ async function createPost(req, res, next) {
     try {
         if (!req.user) return res.status(401).json({ message: 'Unauthorized' });
 
-        if (!req.body.title || !req.body.text) return res.status(400).json({ message: 'Missing parameters' })
+
+        const title = String(req.body.title ?? '').trim();
+        const text = String(req.body.text ?? '').trim();
+
+        if (!title || !text) return res.status(400).json({ message: 'Missing parameters' })
 
         await prisma.post.create({
             data: {
@@ -29,7 +33,7 @@ async function createPost(req, res, next) {
                 userId: req.user.id,
             },
         });
-        return res.status(200).json({
+        return res.status(201).json({
             message: 'Post added to drafts. Please confirm you\'re finished and then hit publish',
         });
     } catch (err) {
@@ -79,10 +83,16 @@ async function getBlogPostById(req, res, next) {
         const post = await prisma.post.findUnique({
             where: {
                 id: postId,
-                published: true,
             }
         });
-        return res.status(200).json(post)
+        if (!post) return res.status(404).json({ message: 'Post not found' });
+
+        if (!post.published) {
+            if (!req.user) return res.status(401).json({ message: 'Unauthorized' });
+            const isOwner = post.userId === req.user.id;
+            if (!isOwner) return res.status(403).json({ message: 'Forbidden' });
+        };
+        return res.status(200).json(post);
     } catch (err) {
         return next(err);
     }
@@ -94,7 +104,7 @@ async function updateBlogPost(req, res, next) {
         if (!req.user) return res.status(401).json({ message: 'Unauthorized' });
 
         const postId = Number(req.params.postId);
-        if (!Number.isInteger(postId)) return res.status(404).json({ message: 'Post not found' });
+        if (!Number.isInteger(postId)) return res.status(400).json({ message: 'Post not found' });
 
         const post = await prisma.post.findUnique({ where: { id: postId } });
         if (!post) return res.status(404).json({ message: 'Post not found' });
@@ -108,12 +118,13 @@ async function updateBlogPost(req, res, next) {
         if (typeof title === 'string') data.title = title;
         if (typeof text === 'string') data.text = text;
 
-        if (Object.keys(data).length === 0) return res.status(400).json({ message: 'No valid fields to update' });
-
         if (publish === true) {
             data.published = true;
             data.publishedAt = new Date();
         }
+
+        if (Object.keys(data).length === 0) return res.status(400).json({ message: 'No valid fields to update' });
+
         await prisma.post.update({
             where: {
                 id: postId,
