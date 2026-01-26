@@ -9,6 +9,9 @@ async function getAllBlogPosts(req, res, next) {
             orderBy: {
                 publishedAt: 'desc'
             },
+            include: {
+                user: { select: { id: true, displayname: true } }
+            },
         });
         return res.status(200).json(posts);
     } catch (error) {
@@ -83,7 +86,11 @@ async function getBlogPostById(req, res, next) {
         const post = await prisma.post.findUnique({
             where: {
                 id: postId,
-            }
+            },
+            include: {
+                user: { select: { id: true, displayname: true } }
+            },
+
         });
         if (!post) return res.status(404).json({ message: 'Post not found' });
 

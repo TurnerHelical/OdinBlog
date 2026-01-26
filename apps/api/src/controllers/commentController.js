@@ -18,6 +18,9 @@ async function getAllCommentsOnPost(req, res, next) {
                 postId: postId,
             },
             orderBy: { createdAt: 'desc' },
+            include: {
+                user: { select: { id: true, displayname: true } }
+            },
         });
         return res.status(200).json(comments);
     } catch (err) {
