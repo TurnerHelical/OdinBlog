@@ -1,4 +1,4 @@
-import { verifyAccessToken } from '../auth/jwt.js';
+import auth from '../auth/jwt.js';
 
 function requireAuth(req, res, next) {
     try {
@@ -8,7 +8,7 @@ function requireAuth(req, res, next) {
         if (type !== 'Bearer' || !token) {
             return res.status(401).json({ message: 'Unauthorized' })
         };
-        const payload = verifyAccessToken(token);
+        const payload = auth.verifyAccessToken(token);
 
         req.user = {
             id: payload.sub,

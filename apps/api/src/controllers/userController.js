@@ -16,13 +16,6 @@ async function getAllUsers(req, res, next) {
     }
 };
 
-async function newUser(req, res, next) {
-    try {
-
-    } catch (err) {
-        return next(err);
-    };
-};
 
 async function getPostsByUser(req, res, next) {
     try {

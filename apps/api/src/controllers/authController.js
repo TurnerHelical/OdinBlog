@@ -1,6 +1,6 @@
 import bcrypt from 'bcrypt';
-import { prisma } from '../lib/prisma/js';
-import { signAccessToken, signRefreshToken, verifyRefreshToken } from '../auth/jwt.js';
+import { prisma } from '../lib/prisma.js';
+import auth from '../auth/jwt.js';
 
 async function register(req, res, next) {
     try {
@@ -49,8 +49,8 @@ async function register(req, res, next) {
             canPost: user.canPost,
         };
 
-        const accessToken = signAccessToken(payload);
-        const refreshToken = signRefreshToken(payload);
+        const accessToken = auth.signAccessToken(payload);
+        const refreshToken = auth.signRefreshToken(payload);
 
 
         res.cookie("refreshToken", refreshToken, {
@@ -98,8 +98,8 @@ async function login(req, res, next) {
 
         const payload = { sub: user.id, isAdmin: user.isAdmin, canPost: user.canPost };
 
-        const accessToken = signAccessToken(payload);
-        const refreshToken = signRefreshToken(payload);
+        const accessToken = auth.signAccessToken(payload);
+        const refreshToken = auth.signRefreshToken(payload);
 
         res.cookie('refreshToken', refreshToken, {
             httpOnly: true,
@@ -120,9 +120,9 @@ async function refresh(req, res) {
         const token = req.cookies.refreshToken;
         if (!token) return res.status(401).json({ message: 'Unauthorized' });
 
-        const payload = verifyRefreshToken(token);
+        const payload = auth.verifyRefreshToken(token);
 
-        const accessToken = signAccessToken({
+        const accessToken = auth.signAccessToken({
             sub: payload.sub,
             isAdmin: payload.isAdmin,
             canPost: payload.canPost,
@@ -139,4 +139,4 @@ async function logout(req, res) {
     return res.status(200).json({ message: 'Logged out' });
 };
 
-export default { login, refresh, logout };
+export default { login, refresh, logout, register };
