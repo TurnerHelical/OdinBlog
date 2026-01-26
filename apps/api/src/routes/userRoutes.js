@@ -1,17 +1,15 @@
 import { Router } from 'express';
 import controller from '../controllers/userController';
+import { requireAuth, requireAdmin } from '../middleware/auth.js';
 
 const router = Router();
 
-router.get('/', controller.getAllUsers); //Admin only
-router.post('/', controller.newUser);
-router.post('/login', controller.userLogin);
-router.post('/logout', controller.userLogout);
-router.get('/:userId/posts', controller.getPostsByUser);
-router.get('/:userId/comments', controller.getCommentsByUser);
-router.get('/:userId', controller.getUserProfile);
-router.patch('/:userId', controller.updateUserProfile);
-router.delete('/:userId', controller.deleteUser);
+router.get('/', requireAuth, requireAdmin, controller.getAllUsers); //Admin only
+router.get('/:userId/posts', requireAuth, controller.getPostsByUser);
+router.get('/:userId/comments', requireAuth, controller.getCommentsByUser);
+router.get('/:userId', requireAuth, controller.getUserProfile);
+router.patch('/:userId', requireAuth, controller.updateUserProfile);
+router.delete('/:userId', requireAuth, controller.deleteUser);
 
 
 

@@ -16,6 +16,14 @@ async function getAllUsers(req, res, next) {
     }
 };
 
+async function newUser(req, res, next) {
+    try {
+
+    } catch (err) {
+        return next(err);
+    };
+};
+
 async function getPostsByUser(req, res, next) {
     try {
         if (!req.user) return res.status(401).json({ message: 'Unauthorized' });
@@ -220,4 +228,6 @@ async function deleteUser(req, res, next) {
     } catch (err) {
         return next(err);
     }
-}
+};
+
+export default { deleteUser, updateUserProfile, getUserProfile, getAllUsers, getPostsByUser, getCommentsByUser };
