@@ -1,3 +1,4 @@
+import { Outlet } from "react-router";
 import Header from "./components/header";
 
 function App() {
@@ -5,7 +6,7 @@ function App() {
     <>
     <Header />
     <main>
-      <h1>Odin Blog</h1>
+      <Outlet />
     </main>
     </>
   )

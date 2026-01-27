@@ -1,11 +1,11 @@
-export async function api(url, options = {}) {
+export async function api(url, { body, headers, ...options } = {}) {
     const res = await fetch(url, {
+        credentials: "include",
         headers: {
-            'Content-Type': 'application/json',
-            ...options.headers,
+            "Content-Type": "application/json",
+            ...headers,
         },
-        body: body ? JSON.stringify(body) : undefined,
-        credentials: 'include',
+        body: body !== undefined ? JSON.stringify(body) : undefined,
         ...options,
     });
 
@@ -13,6 +13,8 @@ export async function api(url, options = {}) {
         const error = await res.json().catch(() => ({}));
         throw error;
     }
+
+    if (res.status === 204) return null;
 
     return res.json();
 }
