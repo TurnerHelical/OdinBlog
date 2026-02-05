@@ -18,6 +18,15 @@ const Home = () => {
                 
             
             </form>
+            <form action={'http://localhost:3001/auth/register'} method='POST'>
+            <input type='text' name='email' id='email'></input>
+            <input type='password' name='password' id='password'></input>
+            <input type='password' name='confirmPassword' id='confirmPassword'></input>
+            <input type='text' name='displayname' id='displayname'></input>
+
+            <button type='submit'>Submit</button>
+
+            </form>
         </>
     )
 }
