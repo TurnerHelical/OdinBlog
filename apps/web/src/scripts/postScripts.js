@@ -1,6 +1,6 @@
-
+import { api } from '../lib/api.js'
 
 export async function getPosts() {
-    const res = await fetch("http://localhost:3001/posts");
-    return res.json();
+    const posts = await api('http://localhost:3001/posts', { method: 'GET' });
+    return posts;
 };
