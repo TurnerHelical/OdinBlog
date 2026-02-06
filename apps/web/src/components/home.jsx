@@ -1,8 +1,12 @@
-import {useLoaderData} from 'react-router';
+import '../styles/home.css'
+import {useLoaderData, Form, useOutletContext} from 'react-router';
+import Modal from './modal';
+import { useModal } from '../hooks/useModal.js';
+
 
 const Home = () => {
     const posts = useLoaderData();
-
+    const modal = useModal();
     return (
         <>
             <h2>This is my home page there will be blog posts here</h2>
@@ -11,22 +15,28 @@ const Home = () => {
                 <li key={b.id}>{b.title}</li>
                 ))}
             </ul>
-            <form action={'http://localhost:3001/auth/login'} method='POST'>
-                <input type='text' name='email' id='email'></input>
-                <input type='password' name='password' id='password'></input>
-                <button type='submit'>Submit</button>
+            <button onClick={modal.show}>Login/Register</button>
+
+            <Modal open={modal.open} onClose={modal.hide} title='Account'>
+            <Form method='post'>
+                <h2>Login</h2>
+                <input type='text' name='email' id='loginEmail'></input>
+                <input type='password' name='password' id='loginPassword'></input>
+                <button type='submit' name='intent' value='login'>Submit</button>
                 
-            
-            </form>
-            <form action={'http://localhost:3001/auth/register'} method='POST'>
-            <input type='text' name='email' id='email'></input>
-            <input type='password' name='password' id='password'></input>
-            <input type='password' name='confirmPassword' id='confirmPassword'></input>
-            <input type='text' name='displayname' id='displayname'></input>
+            </Form>
 
-            <button type='submit'>Submit</button>
+            <Form method='post'>
+                <h2>Register</h2>
+                <input type='text' name='email' id='regEmail'></input>
+                <input type='password' name='password' id='regPassword'></input>
+                <input type='password' name='confirmPassword' id='regConfirm'></input>
+                <input type='text' name='displayname' id='displayname'></input>
 
-            </form>
+                <button type='submit' name='intent' value='register'>Submit</button>
+
+            </Form>
+            </Modal>
         </>
     )
 }
