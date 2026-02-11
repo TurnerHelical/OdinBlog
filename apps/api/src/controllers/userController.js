@@ -123,7 +123,7 @@ async function getUserProfile(req, res, next) {
             return res.status(200).json(profile)
         };
         const ownerProfile = await prisma.user.findUnique({
-            where: { userId },
+            where: { id: userId },
             select: {
                 id: true,
                 email: true,

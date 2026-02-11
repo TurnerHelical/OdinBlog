@@ -1,13 +1,22 @@
 import { api } from '../lib/api.js';
-import { getAccessToken } from '../lib/authState.js';
 
-export async function profileLoader() {
-    try {
-        const profile = await api(`http://localhost:3001/users/me`, { method: 'GET' });
-        return profile;
+function normalizeProfile(raw) {
+    if (raw?.user) return raw
 
-    } catch (err) {
-        throw new Response('Unauthorized', { status: 401 });
-    }
+    return {
+        user: raw,
+    };
+}
 
+
+export async function profileLoader({ params }) {
+    const { userId } = params;
+
+    const raw = userId
+        ? await api(`http://localhost:3001/users/${userId}`, { method: "GET" })
+        : await api("http://localhost:3001/users/me", { method: "GET" });
+
+    const profile = normalizeProfile(raw);
+
+    return profile;
 }

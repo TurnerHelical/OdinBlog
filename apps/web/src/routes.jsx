@@ -14,7 +14,8 @@ const routes = [
         loader: rootLoader,
         children: [
             {index: true, element: <Home />, loader: homeLoader, action: authAction},
-            {path:'profile', element: <Profile />, loader: profileLoader}
+            {path:'/profile', element: <Profile />, loader: profileLoader},
+            {path:'/profile/:userId', element: <Profile />, loader: profileLoader}
         ]
     },
 ];
