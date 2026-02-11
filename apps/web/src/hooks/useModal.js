@@ -4,7 +4,7 @@ export function useModal() {
     const [open, setOpen] = useState(false);
 
 
-    const show = useCallback((name) => {
+    const show = useCallback(() => {
         setOpen(true);
     }, []);
 

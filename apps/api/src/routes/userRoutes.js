@@ -5,6 +5,7 @@ import middleware from '../middleware/auth.js';
 const router = Router();
 
 router.get('/', middleware.requireAuth, middleware.requireAdmin, controller.getAllUsers); //Admin only
+router.get('/me', middleware.requireAuth, controller.getMe)
 router.get('/:userId/posts', middleware.requireAuth, controller.getPostsByUser);
 router.get('/:userId/comments', middleware.requireAuth, controller.getCommentsByUser);
 router.get('/:userId', middleware.requireAuth, controller.getUserProfile);

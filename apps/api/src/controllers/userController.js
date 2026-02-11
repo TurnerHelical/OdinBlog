@@ -223,4 +223,20 @@ async function deleteUser(req, res, next) {
     }
 };
 
-export default { deleteUser, updateUserProfile, getUserProfile, getAllUsers, getPostsByUser, getCommentsByUser };
+async function getMe(req, res, next) {
+    try {
+        const user = await prisma.user.findUnique({
+            where: {
+                id: req.user.id
+            },
+
+            include: { posts: true, comments: true }
+
+        })
+        res.json({ user })
+    } catch (err) {
+        return next(err);
+    }
+}
+
+export default { deleteUser, updateUserProfile, getUserProfile, getAllUsers, getPostsByUser, getCommentsByUser, getMe };

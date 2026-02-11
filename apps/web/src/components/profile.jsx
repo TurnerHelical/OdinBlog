@@ -1,7 +1,11 @@
+import {useLoaderData} from 'react-router';
+
 const Profile = () => {
+    const profile = useLoaderData();
+
     return (
         <>
-        <h1>User Profile</h1>
+        <h1>User {`${profile.user.displayname}`}</h1>
         </>
     )
 }
