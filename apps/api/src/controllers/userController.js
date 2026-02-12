@@ -243,6 +243,8 @@ async function getMe(req, res, next) {
                 firstname: true,
                 lastname: true,
                 email: true,
+                isAdmin: true,
+                canPost: true,
 
 
                 posts: {
