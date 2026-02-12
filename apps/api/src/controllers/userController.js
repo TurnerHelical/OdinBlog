@@ -229,8 +229,13 @@ async function getMe(req, res, next) {
             where: {
                 id: req.user.id
             },
-
-            include: { posts: true, comments: true }
+            select: {
+                displayname: true,
+                bio: true,
+                firstname: true,
+                lastname: true,
+                email: true
+            },
 
         })
         res.json({ user })

@@ -10,13 +10,14 @@ function normalizeProfile(raw) {
 
 
 export async function profileLoader({ params }) {
-    const { userId } = params;
+    if (params.userId) {
+        const raw = await api(`http://localhost:3001/users/${params.userId}`, { method: 'GET' });
+        console.log(raw)
+        return { profile: raw.user ?? raw, isMe: false };
+    }
 
-    const raw = userId
-        ? await api(`http://localhost:3001/users/${userId}`, { method: "GET" })
-        : await api("http://localhost:3001/users/me", { method: "GET" });
+    const raw = await api('http://localhost:3001/users/me', { method: 'GET' });
+    console.log(raw)
+    return { profile: raw.user ?? raw, isMe: true };
 
-    const profile = normalizeProfile(raw);
-
-    return profile;
 }
