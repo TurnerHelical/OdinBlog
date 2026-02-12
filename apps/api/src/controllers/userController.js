@@ -35,7 +35,6 @@ async function getPostsByUser(req, res, next) {
             select: {
                 id: true,
                 title: true,
-                text: true,
                 publishedAt: true,
             },
             orderBy: {
@@ -107,33 +106,42 @@ async function getUserProfile(req, res, next) {
 
         const userId = Number(req.params.userId);
         if (!Number.isInteger(userId) || userId <= 0) return res.status(400).json({ message: 'Invalid user id' });
-
-        const isOwner = req.user.id === userId;
-        const isAdmin = req.user.isAdmin === true;
-
-        if (!isOwner && !isAdmin) {
-            const profile = await prisma.user.findUnique({
-                where: { id: userId },
-                select: {
-                    id: true,
-                    displayname: true,
-                    bio: true,
-                },
-            });
-            return res.status(200).json(profile)
-        };
-        const ownerProfile = await prisma.user.findUnique({
+        const profile = await prisma.user.findUnique({
             where: { id: userId },
             select: {
                 id: true,
-                email: true,
                 displayname: true,
-                firstname: true,
-                lastname: true,
                 bio: true,
-            },
+
+                posts: {
+                    where: {
+                        published: true,
+                    },
+                    select: {
+                        id: true,
+                        title: true,
+                        publishedAt: true,
+                    },
+                    orderBy: {
+                        publishedAt: 'desc',
+                    },
+                },
+                comments: {
+                    select: {
+                        id: true,
+                        text: true,
+                        createdAt: true,
+                        updatedAt: true,
+                        postId: true,
+                    },
+                    orderBy: {
+                        createdAt: 'desc',
+                    }
+                }
+            }
         });
-        return res.status(200).json(ownerProfile);
+        return res.status(200).json(profile)
+
 
 
     } catch (err) {
@@ -234,8 +242,31 @@ async function getMe(req, res, next) {
                 bio: true,
                 firstname: true,
                 lastname: true,
-                email: true
-            },
+                email: true,
+
+
+                posts: {
+                    where: {
+                        published: true,
+                    },
+                    select: {
+                        id: true,
+                        title: true,
+                        publishedAt: true,
+                    },
+                    orderBy: { publishedAt: 'desc' },
+                },
+                comments: {
+                    select: {
+                        id: true,
+                        text: true,
+                        createdAt: true,
+                        updatedAt: true,
+                        postId: true
+                    },
+                    orderBy: { createdAt: 'desc' },
+                }
+            }
 
         })
         res.json({ user })
