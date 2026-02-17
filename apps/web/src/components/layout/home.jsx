@@ -1,5 +1,5 @@
 import '../../styles/home.css'
-import {useLoaderData, Form, useOutletContext} from 'react-router';
+import {useLoaderData, Form} from 'react-router';
 import Modal from '../structure/modal.jsx';
 import { useModal } from '../../hooks/useModal.js';
 

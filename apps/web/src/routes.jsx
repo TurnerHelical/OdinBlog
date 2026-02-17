@@ -2,6 +2,7 @@ import App from "./App";
 import Home from "./components/layout/home";
 import DashboardLayout from './components/dash/dashboard';
 import DashHome from './components/dash/dashHome';
+import DashCreate from './components/dash/dashCreate';
 import { homeLoader } from "./loaders/homeLoader";
 import {authAction} from './actions/authAction';
 import {dashLoader} from './loaders/dashLoader';
@@ -16,7 +17,8 @@ const routes = [
         children: [
             {index: true, element: <Home />, loader: homeLoader, action: authAction},
             {path:'dashboard', element: <DashboardLayout />, loader: dashLoader, children: [
-                {index: true, element: <DashHome />}
+                {index: true, element: <DashHome />},
+                {path:'dashboard/create-draft', element: <DashCreate />}
             ]},
             
         ]

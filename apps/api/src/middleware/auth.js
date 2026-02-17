@@ -26,4 +26,11 @@ function requireAdmin(req, res, next) {
     return next();
 };
 
-export default { requireAdmin, requireAuth };
+function requirePostPermission(req, res, next) {
+    if (!(req.user.isAdmin || req.user.canPost)) {
+        return res.status(403).json({ message: 'Forbidden' });
+    }
+    next();
+}
+
+export default { requireAdmin, requireAuth, requirePostPermission };
