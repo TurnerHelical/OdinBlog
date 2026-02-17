@@ -19,7 +19,7 @@ export async function authAction({ request }) {
         setAccessToken(token.accessToken);
         const decodeToken = jwtDecode(token.accessToken);
         const userId = decodeToken.sub;
-        return redirect(`/profile`);
+        return redirect(`/dashboard`);
 
     }
 }

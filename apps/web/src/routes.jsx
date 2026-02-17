@@ -1,9 +1,10 @@
 import App from "./App";
-import Home from "./components/home";
-import Profile from './components/profile'
+import Home from "./components/layout/home";
+import DashboardLayout from './components/dash/dashboard';
+import DashHome from './components/dash/dashHome';
 import { homeLoader } from "./loaders/homeLoader";
 import {authAction} from './actions/authAction';
-import {profileLoader} from './loaders/profileLoader';
+import {dashLoader} from './loaders/dashLoader';
 import {rootLoader} from './loaders/rootLoader';
 
 
@@ -14,8 +15,10 @@ const routes = [
         loader: rootLoader,
         children: [
             {index: true, element: <Home />, loader: homeLoader, action: authAction},
-            {path:'/profile', element: <Profile />, loader: profileLoader},
-            {path:'/profile/:userId', element: <Profile />, loader: profileLoader}
+            {path:'dashboard', element: <DashboardLayout />, loader: dashLoader, children: [
+                {index: true, element: <DashHome />}
+            ]},
+            
         ]
     },
 ];

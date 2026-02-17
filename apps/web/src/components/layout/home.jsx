@@ -1,7 +1,7 @@
-import '../styles/home.css'
+import '../../styles/home.css'
 import {useLoaderData, Form, useOutletContext} from 'react-router';
-import Modal from './modal';
-import { useModal } from '../hooks/useModal.js';
+import Modal from '../structure/modal.jsx';
+import { useModal } from '../../hooks/useModal.js';
 
 
 const Home = () => {

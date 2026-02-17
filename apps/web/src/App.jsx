@@ -1,6 +1,6 @@
 import { Outlet } from "react-router";
 import {useModal} from './hooks/useModal.js'
-import Header from "./components/header";
+import Header from "./components/layout/header.jsx";
 
 function App() {
   const modal = useModal();

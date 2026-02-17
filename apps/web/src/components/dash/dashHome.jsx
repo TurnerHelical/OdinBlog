@@ -1,42 +1,14 @@
-import {useLoaderData} from 'react-router';
+import { useOutletContext } from "react-router";
 
-const Profile = () => {
-    const {profile, isMe} = useLoaderData();
-    const {user} = profile;
+
+export default function DashHome() {
+    const user = useOutletContext();
     const {displayname, canPost, isAdmin, bio, posts = [], comments = []} = user;
     return (
         <>
-        <h1>User {displayname}</h1>
-        {isMe ? (
-            <>
-            <div>
-                <button>Edit Profile</button>
-                <button>View public profile</button>
-            </div>
-
-            <aside>
-                <nav>
-                    <h3>Menu</h3>
-                    <ul>
-                        <li>Profile</li>
-                        {(canPost || isAdmin) && (
-                            <>
-                            <li>Create Draft</li>
-                            <li>My Drafts</li>
-                            <li>Published Posts</li>
-                            </>
-                        )}
-                        
-                        <li>My Comments</li>
-                    </ul>
-                </nav>
-            </aside>
-            </>
-        ): (<>
-        </>)}
-            <main>
+                <h1>{displayname}'s Profile</h1>
                 <div>
-                    <h2>About Me</h2>
+                    <h2>About</h2>
                     <div>
                         {bio}
                     </div>
@@ -71,10 +43,10 @@ const Profile = () => {
 
                     </div>
                 </div>
-                
-            </main>
-        </>
-    )
-}
+            </>    
+            )
 
-export default Profile;
+                
+            
+        
+}
