@@ -5,7 +5,6 @@ import {useLoaderData} from 'react-router';
 
 const Home = () => {
     const posts = useLoaderData();
-    console.log(posts)
     return (
         <>
             <h2>This is my home page there will be blog posts here</h2>

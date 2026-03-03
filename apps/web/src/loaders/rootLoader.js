@@ -1,13 +1,24 @@
-
+import { api, initAuth } from '../helpers/apiHelper';
 
 async function root() {
     try {
-        const res = await fetch('http://localhost:3001/posts');
-        const posts = await res.json()
-        return posts;
+        const token = await initAuth();
+
+        if (!token) return { user: null };
+
+        const user = await api('/users/me', {
+            method: 'GET',
+        });
+
+        if (!user) return { user: null };
+
+        return { user };
 
     } catch (error) {
-        console.log('error');
+
+        if (error.status === 401) return { user: null };
+
+        throw error;
     }
 
 }
