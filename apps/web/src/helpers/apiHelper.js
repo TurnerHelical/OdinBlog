@@ -75,7 +75,7 @@ async function api({ url, options = {} }) {
         const newToken = await refreshAccessToken();
 
         if (newToken) {
-            return api(url, { ...options, _retried: true });
+            return api({ url, options: { ...options, _retried: true } });
         }
 
         const err = new Error('Not authenticated');

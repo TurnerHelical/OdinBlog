@@ -117,6 +117,7 @@ async function getUserProfile(req, res, next) {
                     where: {
                         published: true,
                     },
+                    take: 5,
                     select: {
                         id: true,
                         title: true,
@@ -127,6 +128,7 @@ async function getUserProfile(req, res, next) {
                     },
                 },
                 comments: {
+                    take: 5,
                     select: {
                         id: true,
                         text: true,
@@ -238,36 +240,11 @@ async function getMe(req, res, next) {
                 id: req.user.id
             },
             select: {
+                id: true,
                 displayname: true,
-                bio: true,
-                firstname: true,
-                lastname: true,
                 email: true,
                 isAdmin: true,
                 canPost: true,
-
-
-                posts: {
-                    where: {
-                        published: true,
-                    },
-                    select: {
-                        id: true,
-                        title: true,
-                        publishedAt: true,
-                    },
-                    orderBy: { publishedAt: 'desc' },
-                },
-                comments: {
-                    select: {
-                        id: true,
-                        text: true,
-                        createdAt: true,
-                        updatedAt: true,
-                        postId: true
-                    },
-                    orderBy: { createdAt: 'desc' },
-                }
             }
 
         })
