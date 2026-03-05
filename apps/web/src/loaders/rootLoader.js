@@ -4,15 +4,18 @@ async function root() {
     try {
         const token = await initAuth();
 
+
         if (!token) return { user: null };
 
-        const user = await api('/users/me', {
-            method: 'GET',
+        const user = await api({
+            url: '/users/me', options: {
+                method: 'GET',
+            }
         });
 
         if (!user) return { user: null };
-
         return { user };
+
 
     } catch (error) {
 

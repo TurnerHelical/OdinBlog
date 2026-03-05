@@ -1,10 +1,13 @@
 import '../../styles/home.css'
-import {useLoaderData} from 'react-router';
+import {useLoaderData, useRouteLoaderData} from 'react-router';
+import {setAccessToken, getAccessToken} from '../../helpers/apiHelper' 
+
 
 
 
 const Home = () => {
     const posts = useLoaderData();
+    
     return (
         <>
             <h2>This is my home page there will be blog posts here</h2>

@@ -21,14 +21,17 @@ async function refreshAccessToken() {
                 credentials: 'include',
             });
 
+
+
             if (!res.ok) {
                 setAccessToken(null);
                 return null;
             }
-            const data = res.json().catch(() => null);
-            const newToken = data?.accessToken;
+            const data = await res.json();
+            const newToken = data.accessToken;
 
             setAccessToken(newToken);
+
             return newToken ?? null;
         } catch {
             setAccessToken(null);

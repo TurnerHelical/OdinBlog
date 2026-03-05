@@ -13,10 +13,14 @@ export async function authAction({ request }) {
         const token = data.accessToken;
         setAccessToken(token);
         return redirect('/');
-    };
+    } else if (intent === 'register') {
 
-    const apiData = await api({ url: '/auth/register', options: { method: 'POST', body: fields } });
-    const token = apiData.accessToken;
-    setAccessToken(token);
-    return redirect('/');
+        const apiData = await api({ url: '/auth/register', options: { method: 'POST', body: fields } });
+        const token = apiData.accessToken;
+        setAccessToken(token);
+        return redirect('/');
+    }
+    await api({ url: '/auth/logout', options: { method: 'POST' } });
+    setAccessToken(null)
+    return redirect('/auth');
 }
