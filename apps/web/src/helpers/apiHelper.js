@@ -62,6 +62,8 @@ async function api({ url, options = {} }) {
         ...(body !== undefined ? { 'Content-Type': 'application/json' } : {}),
     };
 
+
+
     const requestInit = {
         method,
         headers: finalHeaders,
@@ -69,7 +71,9 @@ async function api({ url, options = {} }) {
         ...(body !== undefined ? { body: JSON.stringify(body) } : {}),
     };
 
+
     let res = await fetch(url.startsWith('http') ? url : `${API_BASE}${url}`, requestInit);
+
 
     if (res.status === 401 && !_retried) {
         const newToken = await refreshAccessToken();
@@ -98,7 +102,6 @@ async function api({ url, options = {} }) {
     }
 
     if (res.status === 204) return null;
-
     return res.json();
 }
 

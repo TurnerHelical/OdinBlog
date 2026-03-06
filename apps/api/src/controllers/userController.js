@@ -233,6 +233,55 @@ async function deleteUser(req, res, next) {
     }
 };
 
+async function getProfile(req, res, next) {
+    try {
+        if (!req.user) return res.status(401).json({ message: 'Unauthorized' });
+
+        const profile = await prisma.user.findUnique({
+            where: { id: req.user.id },
+            select: {
+                id: true,
+                displayname: true,
+                bio: true,
+
+                posts: {
+                    where: {
+                        published: true,
+                    },
+                    take: 5,
+                    select: {
+                        id: true,
+                        title: true,
+                        publishedAt: true,
+                    },
+                    orderBy: {
+                        publishedAt: 'desc',
+                    },
+                },
+                comments: {
+                    take: 5,
+                    select: {
+                        id: true,
+                        text: true,
+                        createdAt: true,
+                        updatedAt: true,
+                        postId: true,
+                    },
+                    orderBy: {
+                        createdAt: 'desc',
+                    }
+                }
+            }
+        });
+        return res.status(200).json({ profile });
+
+
+
+    } catch (err) {
+        return next(err);
+    };
+};
+
 async function getMe(req, res, next) {
     try {
         const user = await prisma.user.findUnique({
@@ -254,4 +303,4 @@ async function getMe(req, res, next) {
     }
 }
 
-export default { deleteUser, updateUserProfile, getUserProfile, getAllUsers, getPostsByUser, getCommentsByUser, getMe };
+export default { deleteUser, updateUserProfile, getUserProfile, getAllUsers, getPostsByUser, getCommentsByUser, getMe, getProfile };
