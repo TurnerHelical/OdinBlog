@@ -1,18 +1,18 @@
-import {Outlet} from 'react-router';
+import {Outlet, Link} from 'react-router';
 
 const DashRoot = () => {
     return (
 
         <>
             <div>
-                <ul>
-                    <li>Profile</li>
-                    <li>Create Post</li>
-                    <li>My Posts</li>
-                    <li>My Drafts</li>
-                    <li>My Comments</li>
-                    <li>Settings</li>
-                </ul>
+                
+                    <Link to='/dash/profile'>Profile</Link>
+                    <Link to='/dash/newPost'>Create Post</Link>
+                    <Link to='/dash/posts'>My Posts</Link>
+                    <Link to='/dash/drafts'>My Drafts</Link>
+                    <Link to='/dash/comments'>My Comments</Link>
+                    <Link to='/dash/settings'>Account Settings</Link>
+                
             </div>
             <div>
                 <Outlet/>

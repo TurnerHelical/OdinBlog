@@ -1,3 +1,5 @@
+import {Link} from 'react-router';
+
 const Header = () => {
     return (
         <>
@@ -5,6 +7,11 @@ const Header = () => {
             <div>
                 There will be a link here that will either bring the user to the login/register page or if already logged in will show displayname and a logout button
             </div>
+            <nav>
+                <Link to='/'>Home</Link>
+                <Link to='/dash/profile'>Dashboard</Link>
+                <Link to='/about'>About</Link>
+            </nav>
         </>
     )
 }
