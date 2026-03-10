@@ -16,7 +16,6 @@ function requireAuth(req, res, next) {
             isAdmin: payload.isAdmin === true,
             canPost: payload.canPost === true,
         };
-        console.log(req.user)
         return next();
     } catch (err) {
         return res.status(401).json({ message: 'Unauthorized' })

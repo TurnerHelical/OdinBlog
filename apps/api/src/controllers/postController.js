@@ -1,4 +1,5 @@
 import { prisma } from '../lib/prisma.js';
+import auth from '../auth/jwt.js';
 
 async function getAllBlogPosts(req, res, next) {
     try {
@@ -82,6 +83,7 @@ async function getMyDrafts(req, res, next) {
 
 async function getBlogPostById(req, res, next) {
     try {
+
         const postId = Number(req.params.postId)
         const post = await prisma.post.findUnique({
             where: {
@@ -92,12 +94,27 @@ async function getBlogPostById(req, res, next) {
             },
 
         });
+
+
         if (!post) return res.status(404).json({ message: 'Post not found' });
 
-        if (!post.published) {
+        if (post.published === false) {
+            const header = req.headers['authorization'];
+            const token = header && header.split(' ')[1];
+
+
+            if (!token) {
+                return res.status(401).json({ message: 'Unauthorized' })
+            };
+            const payload = auth.verifyAccessToken(token);
+            req.user = {
+                id: payload.sub,
+            };
+
             if (!req.user) return res.status(401).json({ message: 'Unauthorized' });
             const isOwner = post.userId === req.user.id;
             if (!isOwner) return res.status(403).json({ message: 'Forbidden' });
+            return res.status(200).json(post);
         };
         return res.status(200).json(post);
     } catch (err) {
@@ -128,6 +145,11 @@ async function updateBlogPost(req, res, next) {
         if (publish === true) {
             data.published = true;
             data.publishedAt = new Date();
+        }
+
+        if (publish === false) {
+            data.published = false;
+            data.publishedAt = null;
         }
 
         if (Object.keys(data).length === 0) return res.status(400).json({ message: 'No valid fields to update' });

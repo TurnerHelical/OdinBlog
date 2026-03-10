@@ -3,7 +3,6 @@ import {useLoaderData} from 'react-router';
 const DashProfile = () => {
     const data = useLoaderData();
     const profile = data.profile
-    
 return (
 
 
@@ -21,9 +20,9 @@ return (
                     {!profile.posts.length > 0 
                     ? (<p>No posts yet</p>)                  
                     
-                    : (profile.posts.map((post) => {
-                        <li key={post.id}>{post.title} {post.publishedAt}</li>
-                    }))}
+                    : (profile.posts.map((post) => (
+                        <li key={post.id}>{post.title} {new Date(post.publishedAt).toLocaleDateString()}</li>
+                    )))}
                 </ul>
             </div>
 
