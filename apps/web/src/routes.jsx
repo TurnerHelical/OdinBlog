@@ -7,6 +7,7 @@ import {DashRoot} from './components/dash/dashRoot';
 import {DashCreate} from './components/dash/dashCreate';
 import {DashDrafts} from './components/dash/dashDrafts';
 import {DashPosts} from './components/dash/dashPosts';
+import {BlogPage} from './components/blogPost/blogPage';
 import {postCreate} from './actions/dashActions/dashCreateAction';
 import {authAction} from './actions/authActions';
 import {postEdit} from './actions/dashActions/postEdit';
@@ -16,7 +17,9 @@ import {dashProfileLoader} from './loaders/dashLoaders/dashProfileLoader';
 import {draftLoader} from './loaders/dashLoaders/dashDraftLoader';
 import {editLoader} from './loaders/dashLoaders/postEditLoader';
 import {myPostLoader} from './loaders/dashLoaders/dashPostLoader';
+import {blogPostLoader} from './loaders/blogPostLoader';
 import { PostUpdate } from "./components/dash/dashPostUpdate";
+import { blogPageAction } from "./actions/blogPageAction";
 
 const routes = [
     {
@@ -37,6 +40,7 @@ const routes = [
                 {path: 'editPost/:postId', element: <PostUpdate/>, loader: editLoader, action: postEdit}, 
                 {path: 'posts', element: <DashPosts />, loader: myPostLoader},
             ]},
+            {path: 'blog/:postId', element: <BlogPage/>, loader: blogPostLoader, action: blogPageAction},
             
             
         ]

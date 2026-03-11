@@ -9,7 +9,8 @@ const DashPosts = () => {
                 {data.length > 0 
                 ?(data.map(post => (
                     <div key={post.id}>
-                        <Link to={`/dash/editPost/${post.id}`}>{post.title}</Link>
+                        <Link to={`/blog/${post.id}`}>{post.title}</Link>
+                        <Link to={`/dash/editPost/${post.id}`}>Edit Post</Link>
                     </div>
                 )))
                 :(<>

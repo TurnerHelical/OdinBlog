@@ -90,7 +90,8 @@ async function getBlogPostById(req, res, next) {
                 id: postId,
             },
             include: {
-                user: { select: { id: true, displayname: true } }
+                user: { select: { id: true, displayname: true } },
+                comments: { select: { id: true, text: true, createdAt: true, updatedAt: true, user: { select: { id: true, displayname: true } } } }
             },
 
         });

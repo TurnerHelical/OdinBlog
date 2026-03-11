@@ -2,9 +2,10 @@ import {useLoaderData, Form} from 'react-router';
 
 const PostUpdate = () => {
     const data = useLoaderData();
+    console.log(data);
     return (
         <>
-            <Form action='/dash/editPost/:postId' method='patch'>
+            <Form action={`/dash/editPost/${data.id}`} method='patch'>
                 <input name='title' id='title' defaultValue={data.title}></input>
                 <textarea rows='10' cols='75'name='text' id='text' defaultValue={data.text}></textarea>
                 {data.published ? (
