@@ -137,14 +137,6 @@ async function getMyComments(req, res, next) {
         if (!req.user) return res.status(401).json({ message: 'Unauthorized' });
         const myComments = await prisma.comment.findMany({
             where: { userId: req.user.id },
-            include: {
-                post: {
-                    select: {
-                        id: true,
-                        title: true,
-                    },
-                },
-            },
             orderBy: { createdAt: 'desc' },
 
         });
