@@ -4,7 +4,7 @@ import {useEffect, useState, useRef} from 'react';
 const BlogPage = () => {
     const post = useLoaderData();
     const navigation = useNavigation();
-
+    const [commentOpen, setCommentOpen] = useState(false);
     const [commentText, setCommentText] = useState('');
     const wasSubmittingRef = useRef(false);
 
@@ -28,14 +28,17 @@ const BlogPage = () => {
                 <p>{new Date(post.publishedAt).toLocaleDateString()}</p>
             </div>
             <div>
-                <button>New comment</button>
-                <div>
+                <button onClick={() => setCommentOpen(previous => !previous)}>{(commentOpen ? 'Close comment box' : 'New comment')}</button>
+                {commentOpen ?
+                (<div>
                     <Form action={`/blog/${post.id}`} method='post'>
-                        <input name='text' id='text' placeholder='Enter Comment Text' value={commentText} onChange={(e) => setCommentText(e.target.value)} />
+                        <textarea name='text' id='text' placeholder='Enter Comment Text' value={commentText} onChange={(e) => setCommentText(e.target.value)} />
                         <input type='hidden' name='postId' value={post.id}></input>
                         <button type='submit' disabled={navigation.state !== 'idle'}>{navigation.state === 'submitting' ? 'Posting....' : 'Post Comment'}</button>
                     </Form>
-                </div>
+                </div>)
+                : ('')
+                }
             </div>
             <div>
                 
