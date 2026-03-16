@@ -1,12 +1,16 @@
-import {useLoaderData, Link, Form, useNavigation} from 'react-router';
+import {useLoaderData, Link, Form, useNavigation, useRouteLoaderData} from 'react-router';
 import {useEffect, useState, useRef} from 'react';
 
 const BlogPage = () => {
     const post = useLoaderData();
     const navigation = useNavigation();
+    const rootData = useRouteLoaderData('root')
     const [commentOpen, setCommentOpen] = useState(false);
     const [commentText, setCommentText] = useState('');
     const wasSubmittingRef = useRef(false);
+    const user = rootData.user.user;
+    console.log(user);
+    
 
     useEffect(() => {
         if (navigation.state === 'submitting') {
@@ -48,6 +52,10 @@ const BlogPage = () => {
                     <div key={comment.id}>
                         <Link to={`/user/${comment.user.id}`}>{comment.user.displayname}</Link>
                         <p>{comment.text}</p>
+                        {user.id === comment.user.id 
+                        ? (<Link to={`/dash/editComment/${comment.id}`}>Edit Comment</Link>)
+                        : ('')
+                        }
                     </div>
                 )))
                 : (<div>

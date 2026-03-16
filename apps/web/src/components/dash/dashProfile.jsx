@@ -1,8 +1,8 @@
-import {useLoaderData} from 'react-router';
+import {useLoaderData, Link} from 'react-router';
 
 const DashProfile = () => {
     const data = useLoaderData();
-    const profile = data.profile
+    const profile = data.profile;
 return (
 
 
@@ -28,14 +28,17 @@ return (
 
             <div>
                 <h3>My Comments</h3>
-                <ul>
+                <div>
                     {!profile.comments.length > 0 
-                    ? (<p>No comments yet</p>)                  
-                    
-                    : (profile.comments.map((comment) => {
-                        <li key={comment.id}>{comment.text} {comment.createdAt} {comment.updatedAt}</li>
-                    }))}
-                </ul>
+                    ? ( <div>
+                        <p>No comments yet</p>               
+                        </div>)
+                    : (profile.comments.map((comment) => (
+                        < div key={comment.id}>
+                            <p>{comment.text} {new Date(comment.createdAt).toLocaleDateString()} {comment.updatedAt !== null ? (`${(new Date(comment.updatedAt).toLocaleDateString())}`):('')}</p>
+                        </div>
+                    )))}
+                </div>
             </div>
     </>
     )

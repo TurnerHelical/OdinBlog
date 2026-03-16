@@ -21,7 +21,10 @@ import {myPostLoader} from './loaders/dashLoaders/dashPostLoader';
 import {commentLoader} from './loaders/dashLoaders/dashCommentLoader';
 import {blogPostLoader} from './loaders/blogPostLoader';
 import { PostUpdate } from "./components/dash/dashPostUpdate";
+import {UpdateComment} from './components/dash/dashCommentUpdate';
+import {commentUpdateLoader} from './loaders/dashLoaders/dashCommentUpdateLoader';
 import { blogPageAction } from "./actions/blogPageAction";
+import {commentUpdate} from './actions/dashActions/commentUpdate';
 
 const routes = [
     {
@@ -42,6 +45,7 @@ const routes = [
                 {path: 'editPost/:postId', element: <PostUpdate/>, loader: editLoader, action: postEdit}, 
                 {path: 'posts', element: <DashPosts />, loader: myPostLoader},
                 {path: 'comments', element: <DashComments />, loader: commentLoader},
+                {path:'editComment/:commentId', element: <UpdateComment />, loader:commentUpdateLoader, action: commentUpdate}
             ]},
             {path: 'blog/:postId', element: <BlogPage/>, loader: blogPostLoader, action: blogPageAction},
             

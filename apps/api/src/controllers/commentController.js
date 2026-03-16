@@ -57,6 +57,20 @@ async function createComment(req, res, next) {
     }
 };
 
+async function getCommentById(req, res, next) {
+    try {
+        if (!req.user) return res.status(401).json({ message: 'Unauthorized' });
+        const commentId = Number(req.params.commentId);
+        const data = await prisma.comment.findUnique({
+            where: { id: commentId },
+            select: { id: true, text: true, createdAt: true, updatedAt: true }
+        });
+        return res.status(200).json(data);
+    } catch (err) {
+        return next(err);
+    }
+}
+
 async function updateComment(req, res, next) {
     try {
         if (!req.user) return res.status(401).json({ message: 'Unauthorized' });
@@ -89,7 +103,7 @@ async function updateComment(req, res, next) {
                 id: commentId,
             },
             data: {
-                text: updatedText,
+                text: text,
                 updatedAt: new Date(),
             },
         });
@@ -146,4 +160,4 @@ async function getMyComments(req, res, next) {
     }
 };
 
-export default { getAllCommentsOnPost, getMyComments, updateComment, deleteComment, createComment }
+export default { getAllCommentsOnPost, getMyComments, updateComment, deleteComment, createComment, getCommentById }

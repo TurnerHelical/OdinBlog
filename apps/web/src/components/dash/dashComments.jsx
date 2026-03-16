@@ -13,10 +13,11 @@ const DashComments = () => {
                                 <p>{comment.text}</p>
                                 <p>{new Date(comment.createdAt).toLocaleDateString()}</p>
                                 {comment.updatedAt 
-                                    ? (new Date(comment.updatedAt).toLocaleDateString())
+                                    ? (<p>{new Date(comment.updatedAt).toLocaleDateString()}</p>)
                                     : ('')
                                 }
                             </Link>
+                            <Link to={`/dash/editComment/${comment.id}`}>Edit Comment</Link>
                         </div>
                     ))
                         
