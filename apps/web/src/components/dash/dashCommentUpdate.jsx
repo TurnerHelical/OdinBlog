@@ -1,7 +1,9 @@
 import {Form, useLoaderData} from 'react-router';
+import {useState} from 'react'
 
 const UpdateComment = () => {
     const data = useLoaderData();
+    const [dangerZone, setDangerZone] = useState(false);
 
     return (
         <>
@@ -12,9 +14,14 @@ const UpdateComment = () => {
                 <button type='submit' name='intent' value='edit'>Update</button>          
             </Form>
 
+            <button onClick={() => setDangerZone(previous => !previous)}>DANGER ZONE</button>
+
+            {!dangerZone 
+            ? ('')
+            :(
             <Form action={`/dash/editComment/${data.id}`} method='delete'>
                 <button type='submit' name='intent' value='delete'>Delete Comment</button>
-            </Form>
+            </Form>)}
         
         </>
     )
