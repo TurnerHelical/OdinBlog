@@ -1,7 +1,9 @@
 import {useLoaderData, Form} from 'react-router';
+import {useState} from 'react';
 
 const PostUpdate = () => {
     const data = useLoaderData();
+    const [dangerZone, setDangerZone] = useState(false);
     return (
         <>
             <Form action={`/dash/editPost/${data.id}`} method='patch'>
@@ -27,9 +29,13 @@ const PostUpdate = () => {
                 )}
                 <button type='submit' name='intent' value='edit'>Submit</button>
             </Form>
-            <Form action={`/dash/editPost/${data.id}`} method='delete'>
+
+            <button onClick={() => setDangerZone(previous => !previous)}>DANGER ZONE</button>
+            {!dangerZone 
+            ? ('')
+            :(<Form action={`/dash/editPost/${data.id}`} method='delete'>
                 <button type='submit' name='intent' value='delete'>Delete this post</button>
-            </Form>
+            </Form>)}
         
         </>
     )
