@@ -9,7 +9,6 @@ const BlogPage = () => {
     const [commentText, setCommentText] = useState('');
     const wasSubmittingRef = useRef(false);
     const user = rootData.user.user;
-    console.log(user);
     
 
     useEffect(() => {

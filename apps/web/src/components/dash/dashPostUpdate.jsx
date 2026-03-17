@@ -2,7 +2,6 @@ import {useLoaderData, Form} from 'react-router';
 
 const PostUpdate = () => {
     const data = useLoaderData();
-    console.log(data);
     return (
         <>
             <Form action={`/dash/editPost/${data.id}`} method='patch'>
@@ -13,7 +12,7 @@ const PostUpdate = () => {
                         <p>Would you like to take this post down?</p>
                         <input type='radio' name='unpublish' value='true' id='unpublishTrue'></input>
                         <label htmlFor='publishTrue'>Yes</label>
-                        <input type='radio' name='unpublish' value='false' id='unpublishFalse'></input>
+                        <input type='radio' name='unpublish' value='false' id='unpublishFalse' defaultChecked></input>
                         <label htmlFor='publishFalse'>No</label>
                     </div>
                 ) 
@@ -22,12 +21,14 @@ const PostUpdate = () => {
                         <p>Would you like to publish this blog post?</p>
                         <input type='radio' name='publish' value='true' id='publishTrue'></input>
                         <label htmlFor='publishTrue'>Yes</label>
-                        <input type='radio' name='publish' value='false' id='publishFalse'></input>
+                        <input type='radio' name='publish' value='false' id='publishFalse' defaultChecked></input>
                         <label htmlFor='publishFalse'>No</label>
                     </div>
                 )}
-                <input type='hidden' name='postId' value={data.id}></input>
-                <button type='submit'>Submit</button>
+                <button type='submit' name='intent' value='edit'>Submit</button>
+            </Form>
+            <Form action={`/dash/editPost/${data.id}`} method='delete'>
+                <button type='submit' name='intent' value='delete'>Delete this post</button>
             </Form>
         
         </>
