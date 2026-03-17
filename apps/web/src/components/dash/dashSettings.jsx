@@ -31,7 +31,7 @@ const DashSettings = () => {
                     <Form>
                         <textarea name='bio' id='bio'  value={updateData.bio} onChange={(e) => setUpdateData({...updateData, bio: e.target.value})}/>
                         <input name='displayname'  value={updateData.displayname} onChange={(e) => setUpdateData({...updateData, displayname: e.target.value})} />
-                        <button type='submit'>{navigation.state === 'submitting' ? 'Updating.....' : 'Update Profile'}</button>
+                        <button type='submit' name='intent' value='updateProfile'>{navigation.state === 'submitting' ? 'Updating.....' : 'Update Profile'}</button>
                     </Form>
 
                 )
