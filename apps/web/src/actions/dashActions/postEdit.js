@@ -26,7 +26,8 @@ async function postEdit({ request, params }) {
         }
     }
     if (data.intent === 'delete') {
-
+        await api({ url: `/posts/${postId}`, options: { method: 'DELETE' } });
+        return redirect('/dash');
     }
 }
 

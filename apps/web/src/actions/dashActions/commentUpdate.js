@@ -5,11 +5,19 @@ async function commentUpdate({ request, params }) {
     const commentId = params.commentId
     const fd = await request.formData();
     const data = Object.fromEntries(fd);
-    const newText = {
-        updatedText: data.commentText,
+
+    if (data.intent === 'edit') {
+        const newText = {
+            updatedText: data.commentText,
+        }
+        await api({ url: `/comments/${commentId}`, options: { method: 'PATCH', body: newText } });
+        return redirect('/dash/comments');
     }
-    await api({ url: `/comments/${commentId}`, options: { method: 'PATCH', body: newText } });
-    return redirect('/dash/comments');
+
+    if (data.intent === 'delete') {
+        await api({ url: `/comments/${commentId}`, options: { method: 'DELETE' } });
+        return redirect('/dash');
+    }
 }
 
 export { commentUpdate };

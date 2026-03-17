@@ -1,4 +1,4 @@
-import {Form, useLoaderData, useRouteLoaderData} from 'react-router';
+import {Form, useLoaderData} from 'react-router';
 
 const UpdateComment = () => {
     const data = useLoaderData();
@@ -9,7 +9,11 @@ const UpdateComment = () => {
                 <input name='commentText' id='commentText' defaultValue={data.text}></input>
                 <p>Created at: {new Date(data.createdAt).toLocaleDateString()}</p>
 
-                <button type='submit'>Update</button>          
+                <button type='submit' name='intent' value='edit'>Update</button>          
+            </Form>
+
+            <Form action={`/dash/editComment/${data.id}`} method='delete'>
+                <button type='submit' name='intent' value='delete'>Delete Comment</button>
             </Form>
         
         </>
