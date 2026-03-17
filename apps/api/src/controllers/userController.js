@@ -174,8 +174,6 @@ async function updateUserProfile(req, res, next) {
             };
             data.displayname = trimmed;
         };
-        if (typeof req.body.firstname === 'string') data.firstname = req.body.firstname.trim();
-        if (typeof req.body.lastname === 'string') data.lastname = req.body.lastname.trim();
         if (typeof req.body.bio === 'string') data.bio = req.body.bio.trim();
         const hasPasswordFields =
             typeof req.body.password === "string" || typeof req.body.confirmPassword === "string";
@@ -243,6 +241,7 @@ async function getProfile(req, res, next) {
                 id: true,
                 displayname: true,
                 bio: true,
+
 
                 posts: {
                     where: {
