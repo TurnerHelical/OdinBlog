@@ -27,6 +27,7 @@ import { blogPageAction } from "./actions/blogPageAction";
 import {commentUpdate} from './actions/dashActions/commentUpdate';
 import {DashSettings} from './components/dash/dashSettings';
 import {settingsLoader} from './loaders/dashLoaders/dashSettingsLoader';
+import {settingsAction} from './actions/dashActions/settingsAction';
 
 const routes = [
     {
@@ -48,7 +49,7 @@ const routes = [
                 {path: 'posts', element: <DashPosts />, loader: myPostLoader},
                 {path: 'comments', element: <DashComments />, loader: commentLoader},
                 {path:'editComment/:commentId', element: <UpdateComment />, loader:commentUpdateLoader, action: commentUpdate},
-                {path: 'settings', element: <DashSettings />, loader: settingsLoader}
+                {path: 'settings', element: <DashSettings />, loader: settingsLoader, action: settingsAction},
             ]},
             {path: 'blog/:postId', element: <BlogPage/>, loader: blogPostLoader, action: blogPageAction},
             

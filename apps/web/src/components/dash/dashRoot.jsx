@@ -1,15 +1,18 @@
-import {Outlet, Link, useRouteLoaderData} from 'react-router';
+import {Outlet, Link, useLoaderData, redirect} from 'react-router';
+
 
 const DashRoot = () => {
-    const rootData = useRouteLoaderData('root');
-    const user = rootData.user.user;
+    const data = useLoaderData();
+    
+    
+    
     return (
 
         <>
             <div>
                 
                     <Link to='/dash'>Profile</Link>
-                    {user.canPost ? (
+                    {data.canPost ? (
                         <>
                         <Link to='/dash/create'>Create Post</Link>
                         <Link to='/dash/posts'>My Posts</Link>

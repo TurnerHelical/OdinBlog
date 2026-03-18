@@ -1,4 +1,4 @@
-import {Form, Link, useLoaderData, useNavigation} from 'react-router';
+import {Form, useLoaderData, useNavigation} from 'react-router';
 import {useState, useRef, useEffect} from 'react';
 
 const DashSettings = () => {
@@ -28,7 +28,7 @@ const DashSettings = () => {
             {!updateProfile 
                 ? ('')
                 :(
-                    <Form>
+                    <Form action='/dash/settings' method='post'>
                         <textarea name='bio' id='bio'  value={updateData.bio} onChange={(e) => setUpdateData({...updateData, bio: e.target.value})}/>
                         <input name='displayname'  value={updateData.displayname} onChange={(e) => setUpdateData({...updateData, displayname: e.target.value})} />
                         <button type='submit' name='intent' value='updateProfile'>{navigation.state === 'submitting' ? 'Updating.....' : 'Update Profile'}</button>

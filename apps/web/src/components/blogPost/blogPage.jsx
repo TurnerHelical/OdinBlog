@@ -8,7 +8,8 @@ const BlogPage = () => {
     const [commentOpen, setCommentOpen] = useState(false);
     const [commentText, setCommentText] = useState('');
     const wasSubmittingRef = useRef(false);
-    const user = rootData.user.user;
+    const user = rootData.user?.user;
+
     
 
     useEffect(() => {
@@ -25,7 +26,7 @@ const BlogPage = () => {
     return (
         <>
             <h2>{post.title}</h2>
-            <h4>By {post.user.displayname}</h4>
+            <h4>By {post.user?.displayname ? post.user.displayname : 'Account Deleted'}</h4>
             <div>
                 <p>{post.text}</p>
                 <p>{new Date(post.publishedAt).toLocaleDateString()}</p>
@@ -34,11 +35,12 @@ const BlogPage = () => {
                 <button onClick={() => setCommentOpen(previous => !previous)}>{(commentOpen ? 'Close comment box' : 'New comment')}</button>
                 {commentOpen ?
                 (<div>
-                    <Form action={`/blog/${post.id}`} method='post'>
+                    {!user ? (<p>Please login before commenting!</p>)
+                    :<Form action={`/blog/${post.id}`} method='post'>
                         <textarea name='text' id='text' placeholder='Enter Comment Text' value={commentText} onChange={(e) => setCommentText(e.target.value)} />
                         <input type='hidden' name='postId' value={post.id}></input>
                         <button type='submit' disabled={navigation.state !== 'idle'}>{navigation.state === 'submitting' ? 'Posting....' : 'Post Comment'}</button>
-                    </Form>
+                    </Form>}
                 </div>)
                 : ('')
                 }
@@ -49,9 +51,13 @@ const BlogPage = () => {
                 {post.comments.length > 0 
                 ? ( post.comments.map(comment => (
                     <div key={comment.id}>
-                        <Link to={`/user/${comment.user.id}`}>{comment.user.displayname}</Link>
-                        <p>{comment.text}</p>
-                        {user.id === comment.user.id 
+                        {comment.user 
+                        ? <><Link to={`/user/${comment.user.id}`}>{comment.user.displayname}</Link>
+                            <p>{comment.text}</p>
+                            </>
+                        : <><p>Account Deleted</p>
+                            <p>{comment.text}</p> </>}
+                        {user.id === comment.user?.id 
                         ? (<Link to={`/dash/editComment/${comment.id}`}>Edit Comment</Link>)
                         : ('')
                         }
