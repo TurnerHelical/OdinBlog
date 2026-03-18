@@ -125,7 +125,7 @@ async function getBlogPostById(req, res, next) {
 
 async function updateBlogPost(req, res, next) {
     try {
-
+        console.log(req);
         if (!req.user) return res.status(401).json({ message: 'Unauthorized' });
 
         const postId = Number(req.params.postId);
