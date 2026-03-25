@@ -42,15 +42,10 @@ async function getPostsByUser(req, res, next) {
             },
         });
 
-        const PREVIEW_LEN = 240;
-
         const previewPosts = posts.map(post => ({
             id: post.id,
             title: post.title,
             publishedAt: post.publishedAt,
-            previewText: post.text.length > PREVIEW_LEN
-                ? post.text.slice(0, PREVIEW_LEN) + '...'
-                : post.text,
         }));
         return res.status(200).json(previewPosts);
 

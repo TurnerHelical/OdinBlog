@@ -28,8 +28,11 @@ import {commentUpdate} from './actions/dashActions/commentUpdate';
 import {DashSettings} from './components/dash/dashSettings';
 import {settingsLoader} from './loaders/dashLoaders/dashSettingsLoader';
 import {settingsAction} from './actions/dashActions/settingsAction';
+import {UserProfileRoot} from './components/userProfile/userProfileRoot';
 import {UserProfile} from './components/userProfile/profile';
 import {profileLoader} from './loaders/profileLoader';
+import {UserPosts} from './components/userProfile/userPosts';
+import {userPostLoader} from './loaders/userPostLoader';
 
 const routes = [
     {
@@ -54,7 +57,13 @@ const routes = [
                 {path: 'settings', element: <DashSettings />, loader: settingsLoader, action: settingsAction},
             ]},
             {path: 'blog/:postId', element: <BlogPage/>, loader: blogPostLoader, action: blogPageAction},
-            {path: 'user/:userId', element: <UserProfile />, loader: profileLoader,}
+            {path: 'user/:userId', element: <UserProfileRoot />, loader: profileLoader, id: 'profileRoot', children: [
+                {index: true, element:<UserProfile />},
+                {path: '/user/:userId/posts', element: <UserPosts />, loader: userPostLoader},
+            ]}, 
+            
+                // {path: 'user/:userId/comments', element: <UserComment />, loader: userCommentLoader}
+            
             
             
         ]

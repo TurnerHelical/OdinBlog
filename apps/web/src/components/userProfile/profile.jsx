@@ -1,8 +1,7 @@
-import {useLoaderData, Link} from 'react-router';
+import {useRouteLoaderData, Link} from 'react-router';
 
 const UserProfile = () => {
-    const user = useLoaderData();
-    
+    const user = useRouteLoaderData('profileRoot');
     return (
         <>
             <div>
@@ -13,7 +12,10 @@ const UserProfile = () => {
 
                 <div>
                     <h3>{user.displayname}'s Posts</h3>
-                        <div>
+                    {user.posts.length > 0 
+                       ? (
+                       
+                       <div>  
                             {user.posts.map(post => (
                                 <Link to={`/blog/${post.id}`} key={post.id}>
                                     
@@ -21,13 +23,19 @@ const UserProfile = () => {
                                     <p>{post.publishedAt}</p>
                                 </Link>
                             ))}
-                        </div>
-                        <Link>More Posts</Link>
+                            <Link to={`posts`}>More Posts</Link>
+                        </div>)
+
+                        : (<div>
+                            <p>No Posts Yet!</p>
+                        </div>)
+                    }
                 </div>
 
                 <div>
                     <h3>{user.displayname}'s Comments</h3>
-                    <div>
+                    {user.comments.length > 0 
+                    ? (<div>
                         {user.comments.map(comment => (
                             <Link to={`/blog/${comment.postId}`} key={comment.id}>
                                 <p>{comment.text}</p>
@@ -35,9 +43,14 @@ const UserProfile = () => {
                             </Link>
                         ))}
                         <Link>More Comments</Link>
-                    </div>
-                </div>
+                    </div>)
 
+                    :(<div>
+                        <p>No Comments Yet!</p>
+                    </div>)
+                    }
+                </div>
+    
             </div>
         </>
     )
