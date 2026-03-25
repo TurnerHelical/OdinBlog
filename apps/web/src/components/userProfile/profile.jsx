@@ -15,7 +15,8 @@ const UserProfile = () => {
                     <h3>{user.displayname}'s Posts</h3>
                         <div>
                             {user.posts.map(post => (
-                                <Link to={`blog/${post.id}`}>
+                                <Link to={`/blog/${post.id}`} key={post.id}>
+                                    
                                     <h4>{post.title}</h4>
                                     <p>{post.publishedAt}</p>
                                 </Link>
@@ -28,7 +29,7 @@ const UserProfile = () => {
                     <h3>{user.displayname}'s Comments</h3>
                     <div>
                         {user.comments.map(comment => (
-                            <Link to={`/blog/${comment.postId}`}>
+                            <Link to={`/blog/${comment.postId}`} key={comment.id}>
                                 <p>{comment.text}</p>
                                 <p>{comment.upDatedAt ?? comment.publishedAt}</p>
                             </Link>
