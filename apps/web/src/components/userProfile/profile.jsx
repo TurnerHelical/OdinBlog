@@ -20,7 +20,7 @@ const UserProfile = () => {
                                 <Link to={`/blog/${post.id}`} key={post.id}>
                                     
                                     <h4>{post.title}</h4>
-                                    <p>{post.publishedAt}</p>
+                                    <p>{new Date(post.publishedAt).toLocaleDateString()}</p>
                                 </Link>
                             ))}
                             <Link to={`posts`}>More Posts</Link>
@@ -39,10 +39,10 @@ const UserProfile = () => {
                         {user.comments.map(comment => (
                             <Link to={`/blog/${comment.postId}`} key={comment.id}>
                                 <p>{comment.text}</p>
-                                <p>{comment.upDatedAt ?? comment.publishedAt}</p>
+                                <p>{comment.updatedAt ? new Date(comment.updatedAt).toLocaleDateString() : new Date(comment.createdAt).toLocaleDateString()}</p>
                             </Link>
                         ))}
-                        <Link>More Comments</Link>
+                        <Link to={'comments'}>More Comments</Link>
                     </div>)
 
                     :(<div>

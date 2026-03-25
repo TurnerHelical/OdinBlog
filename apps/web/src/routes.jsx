@@ -33,6 +33,8 @@ import {UserProfile} from './components/userProfile/profile';
 import {profileLoader} from './loaders/profileLoader';
 import {UserPosts} from './components/userProfile/userPosts';
 import {userPostLoader} from './loaders/userPostLoader';
+import {UserComments} from './components/userProfile/userComments';
+import { userCommentsLoader } from "./loaders/userCommentsLoader";
 
 const routes = [
     {
@@ -60,10 +62,8 @@ const routes = [
             {path: 'user/:userId', element: <UserProfileRoot />, loader: profileLoader, id: 'profileRoot', children: [
                 {index: true, element:<UserProfile />},
                 {path: '/user/:userId/posts', element: <UserPosts />, loader: userPostLoader},
-            ]}, 
-            
-                // {path: 'user/:userId/comments', element: <UserComment />, loader: userCommentLoader}
-            
+                {path:'/user/:userId/comments', element: <UserComments />, loader: userCommentsLoader}
+            ]},       
             
             
         ]
