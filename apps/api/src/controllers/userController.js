@@ -59,6 +59,7 @@ async function getCommentsByUser(req, res, next) {
         if (!req.user) return res.status(401).json({ message: 'Unauthorized' });
 
         const userId = Number(req.params.userId);
+
         if (!Number.isInteger(userId) || userId <= 0) return res.status(400).json({ message: 'Invalid user id' });
 
         const comments = await prisma.comment.findMany({

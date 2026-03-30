@@ -1,5 +1,5 @@
 import '../../styles/home.css'
-import {useLoaderData, } from 'react-router';
+import {useLoaderData} from 'react-router';
  
 
 
@@ -7,6 +7,7 @@ import {useLoaderData, } from 'react-router';
 
 const Home = () => {
     const posts = useLoaderData();
+    
     return (
         <>
             <h2>This is my home page there will be blog posts here</h2>

@@ -61,8 +61,8 @@ const routes = [
             {path: 'blog/:postId', element: <BlogPage/>, loader: blogPostLoader, action: blogPageAction},
             {path: 'user/:userId', element: <UserProfileRoot />, loader: profileLoader, id: 'profileRoot', children: [
                 {index: true, element:<UserProfile />},
-                {path: '/user/:userId/posts', element: <UserPosts />, loader: userPostLoader},
-                {path:'/user/:userId/comments', element: <UserComments />, loader: userCommentsLoader}
+                {path: 'posts', element: <UserPosts />, loader: userPostLoader},
+                {path:'comments', element: <UserComments />, loader: userCommentsLoader}
             ]},       
             
             
