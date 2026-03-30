@@ -1,7 +1,7 @@
 let accessToken = null;
 let refreshInFlight = null;
 
-const API_BASE = 'http://localhost:3001';
+const API_BASE = import.meta.env.VITE_API_BASE_URL;
 
 function setAccessToken(token) {
     accessToken = typeof token === 'string' && token.length ? token : null;
