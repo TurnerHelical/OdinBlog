@@ -75,19 +75,19 @@ This project is actively being developed. Planned improvements include:
 
 1. Clone the repository
 
-    - `git clone https://github.com/TurnerHelical/odinblog.git`
-    - `cd odinBlog` 
+        git clone https://github.com/TurnerHelical/odinblog.git
+        cd odinBlog
 
 2. Install dependencies
 
     - Backend
         - `cd odinBlog/apps/api`
-        - run `npm install`
+        - `npm install`
 
 
     - Frontend
         - `cd odinBlog/apps/web`
-        - run `npm install`
+        - `npm install`
 
 
 3. Create your database
@@ -98,32 +98,38 @@ This project is actively being developed. Planned improvements include:
 
     - Create a .env file in your backend directory:
 
-        - PORT=your_port
-        - DATABASE_URL=your_database_url
-        - JWT_ACCESS_SECRET=your_secret  
-        - JWT_REFRESH_SECRET=your_secret
-        - JWT_ACCESS_EXPIRES=access_expiration
-        - JWT_REFRESH_EXPIRES=refresh_expiration
-        - CLIENT_URL=frontend_url  
-
-    Place this file in odinBlog/apps/api folder.
+        ```env
+        PORT=your_port
+        DATABASE_URL=your_database_url
+        JWT_ACCESS_SECRET=your_secret  
+        JWT_REFRESH_SECRET=your_secret
+        JWT_ACCESS_EXPIRES=access_expiration
+        JWT_REFRESH_EXPIRES=refresh_expiration
+        CLIENT_URL=frontend_url    
+    Place this file in `odinBlog/apps/api`.
 
     - Create a .env file in the frontend directory:
-        - VITE_API_BASE_URL=your_api_url
-
-    Place this file in odinBlog/apps/web folder.
+        ```env
+        VITE_API_BASE_URL=your_api_url
+    Place this file in `odinBlog/apps/web`.
 
 5. Run the app
 
     - Start backend
         - `cd odinBlog/apps/api`
-        - `npm run setup`  
+        - `npm run setup` 
+
         - To create a test admin account for posting blogs, add the following to your backend .env
-            - SEED_ADMIN_EMAIL=admin@example.com
-            - SEED_ADMIN_PASSWORD=changeme123
-            - SEED_ADMIN_USERNAME=admin
-            - then run, npm run seed:admin
-            - this step is optional
+
+            ```env
+            SEED_ADMIN_EMAIL=admin@example.com
+            SEED_ADMIN_PASSWORD=changeme123
+            SEED_ADMIN_USERNAME=admin  
+            ```
+            - Then run:
+                - `npm run seed:admin`
+                - *(optional)*
+            
         - `npm run dev`
 
     - Start frontend
