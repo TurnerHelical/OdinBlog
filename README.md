@@ -1,4 +1,4 @@
-📘 OdinBlog – Full Stack Blog Platform
+📘 OdinBlog – Full Stack Blog Platform /br
 🚀 Overview
 
 OdinBlog is a full stack blog application that allows admin-approved users to create and publish posts, while authenticated users can comment and interact with content.
