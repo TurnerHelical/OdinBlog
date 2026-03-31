@@ -151,9 +151,23 @@ If you ran the seed script:
 This project is not currently deployed and is intended to be run locally.  
 Focus is on architecture, authentication, and full stack design rather than final UI polish.
 
-### 📷 Screenshots 
+### 📷 Screenshots
 
-Add screenshots or a short GIF here to showcase functionality
+#### Blog Feed
+Displays published blog posts fetched from the backend.  
+![Blog Feed](apps/screenshots/homepage.png)
+
+#### Blog Post & Comments
+Users can view posts and interact through comments.  
+![Post & Comments](apps/screenshots/blog_post_and_comments.png)
+
+#### Create/Edit Post (Admin)
+Admin users can create and publish blog posts.  
+![Create Post](apps/screenshots/update_post.png)
+
+#### Authentication (Logged In State)
+Authenticated users gain access to protected routes and features.  
+![Auth](apps/screenshots/auth.png)
 
 ### 👤 Author
 
