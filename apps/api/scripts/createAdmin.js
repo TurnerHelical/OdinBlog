@@ -1,47 +1,58 @@
 import 'dotenv/config';
 import bcrypt from 'bcrypt';
-import { PrismaClient } from '@prisma/client';
+import { Pool } from 'pg';
+import { PrismaPg } from '@prisma/adapter-pg';
+import { PrismaClient } from '../src/generated/prisma/client.js';
 
-const prisma = new PrismaClient();
+const connectionString = process.env.DATABASE_URL;
+
+if (!connectionString) {
+  throw new Error('DATABASE_URL is not defined');
+}
+
+const pool = new Pool({ connectionString });
+const adapter = new PrismaPg(pool);
+const prisma = new PrismaClient({ adapter });
 
 async function main() {
-    const email = process.env.SEED_ADMIN_EMAIL;
-    const password = process.env.SEED_ADMIN_PASSWORD;
-    const username = process.env.SEED_ADMIN_USERNAME || 'admin';
+  const email = process.env.SEED_ADMIN_EMAIL;
+  const password = process.env.SEED_ADMIN_PASSWORD;
+  const username = process.env.SEED_ADMIN_USERNAME || 'admin';
 
-    if (!email || !password) {
-        throw new Error(
-            'Missing SEED_ADMIN_EMAIL or SEED_ADMIN_PASSWORD in environment variables.'
-        );
-    }
+  if (!email || !password) {
+    throw new Error(
+      'Missing SEED_ADMIN_EMAIL or SEED_ADMIN_PASSWORD in environment variables.'
+    );
+  }
 
-    const hashedPassword = await bcrypt.hash(password, 10);
+  const hashedPassword = await bcrypt.hash(password, 10);
 
-    const adminUser = await prisma.user.upsert({
-        where: { email },
-        update: {
-            passwordHash: hashedPassword,
-            isAdmin: true,
-            canPost: true,
-            displayname: username,
-        },
-        create: {
-            email,
-            passwordHash: hashedPassword,
-            displayname: username,
-            isAdmin: true,
-            canPost: true,
-        },
-    });
+  const adminUser = await prisma.user.upsert({
+    where: { email },
+    update: {
+      passwordHash: hashedPassword,
+      isAdmin: true,
+      canPost: true,
+      displayname: username,
+    },
+    create: {
+      email,
+      passwordHash: hashedPassword,
+      displayname: username,
+      isAdmin: true,
+      canPost: true,
+    },
+  });
 
-    console.log(`Admin user ready: ${adminUser.email}`);
+  console.log(`Admin user ready: ${adminUser.email}`);
 }
 
 main()
-    .catch((err) => {
-        console.error('Failed to create admin user:', err);
-        process.exit(1);
-    })
-    .finally(async () => {
-        await prisma.$disconnect();
-    });
+  .catch((err) => {
+    console.error('Failed to create admin user:', err);
+    process.exit(1);
+  })
+  .finally(async () => {
+    await prisma.$disconnect();
+    await pool.end();
+  });

@@ -18,7 +18,7 @@ return (
                 <h3>My Posts</h3>
                 <ul>
                     {!profile.posts.length > 0 
-                    ? (<p>No posts yet</p>)                  
+                    ? (<div><p>No posts yet</p></div>)                  
                     
                     : (profile.posts.map((post) => (
                         <li key={post.id}>{post.title} {new Date(post.publishedAt).toLocaleDateString()}</li>
@@ -28,7 +28,7 @@ return (
 
             <div>
                 <h3>My Comments</h3>
-                <div>
+                <ul>
                     {!profile.comments.length > 0 
                     ? ( <div>
                         <p>No comments yet</p>               
@@ -38,7 +38,7 @@ return (
                             <p>{comment.text} {new Date(comment.createdAt).toLocaleDateString()} {comment.updatedAt !== null ? (`${(new Date(comment.updatedAt).toLocaleDateString())}`):('')}</p>
                         </div>
                     )))}
-                </div>
+                </ul>
             </div>
     </>
     )
