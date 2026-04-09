@@ -35,7 +35,10 @@ import {UserPosts} from './components/userProfile/userPosts';
 import {userPostLoader} from './loaders/userPostLoader';
 import {UserComments} from './components/userProfile/userComments';
 import { userCommentsLoader } from "./loaders/userCommentsLoader";
-
+import { AdminRoot } from "./components/adminPanel/adminRoot";
+import {adminLoader} from './loaders/adminLoaders/adminRootLoader';
+import {AdminUsers} from './components/adminPanel/adminUsers';
+import {adminUsersLoader} from './loaders/adminLoaders/adminUsersLoader';
 const routes = [
     {
         path:'/',
@@ -63,7 +66,10 @@ const routes = [
                 {index: true, element:<UserProfile />},
                 {path: 'posts', element: <UserPosts />, loader: userPostLoader},
                 {path:'comments', element: <UserComments />, loader: userCommentsLoader}
-            ]},       
+            ]},
+            {path: 'adminPanel', element: <AdminRoot />, loader: adminLoader, children: [
+                {index: true, element: <AdminUsers/>, loader: adminUsersLoader},
+            ]}       
             
             
         ]

@@ -17,7 +17,7 @@ const Header = () => {
             <nav>
                 <Link to='/'>Home</Link>
                 {rootData.user?.user && (<Link to='/dash'>Dashboard</Link>)}
-                {rootData.user?.user?.isAdmin && (<Link to='/admin'>Admin Panel</Link>)}
+                {rootData.user?.user?.isAdmin && (<Link to='/adminPanel'>Admin Panel</Link>)}
 
             </nav>
         </>

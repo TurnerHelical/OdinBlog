@@ -8,7 +8,9 @@ async function getAllUsers(req, res, next) {
         if (!req.user.isAdmin) return res.status(403).json({ message: 'Forbidden' });
 
         const users = await prisma.user.findMany({
-            orderBy: { displayname: 'desc' }
+            select: { canPost: true, displayname: true, email: true, id: true, isAdmin: true },
+            orderBy: { displayname: 'desc' },
+
         });
         return res.status(200).json(users);
     } catch (err) {
