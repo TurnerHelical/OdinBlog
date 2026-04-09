@@ -1,4 +1,4 @@
-import {Outlet, Link, useLoaderData, redirect} from 'react-router';
+import {Outlet, Link, useLoaderData} from 'react-router';
 
 
 const DashRoot = () => {

@@ -39,6 +39,9 @@ import { AdminRoot } from "./components/adminPanel/adminRoot";
 import {adminLoader} from './loaders/adminLoaders/adminRootLoader';
 import {AdminUsers} from './components/adminPanel/adminUsers';
 import {adminUsersLoader} from './loaders/adminLoaders/adminUsersLoader';
+import {AdminPosts} from './components/adminPanel/adminPosts';
+import {adminPostsLoader} from './loaders/adminLoaders/adminPostsLoader';
+import {adminAction} from './actions/adminActions/adminActions';
 const routes = [
     {
         path:'/',
@@ -69,6 +72,7 @@ const routes = [
             ]},
             {path: 'adminPanel', element: <AdminRoot />, loader: adminLoader, children: [
                 {index: true, element: <AdminUsers/>, loader: adminUsersLoader},
+                {path: 'posts', element: <AdminPosts />, loader: adminPostsLoader, action: adminAction},
             ]}       
             
             

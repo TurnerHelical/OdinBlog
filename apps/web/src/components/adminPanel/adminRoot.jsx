@@ -7,7 +7,7 @@ const AdminRoot = () => {
             <div>
                 <div>
                     <Link to='/adminPanel'>User Panel</Link>
-                    {/* <Link>Post/Comment Panel</Link> */}
+                    <Link to='/adminPanel/posts'>Post Panel</Link>
                 </div>
             </div>
             <div>
