@@ -71,7 +71,7 @@ const routes = [
                 {path:'comments', element: <UserComments />, loader: userCommentsLoader}
             ]},
             {path: 'adminPanel', element: <AdminRoot />, loader: adminLoader, children: [
-                {index: true, element: <AdminUsers/>, loader: adminUsersLoader},
+                {index: true, element: <AdminUsers/>, loader: adminUsersLoader, action: adminAction},
                 {path: 'posts', element: <AdminPosts />, loader: adminPostsLoader, action: adminAction},
             ]}       
             

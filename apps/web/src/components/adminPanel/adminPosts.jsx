@@ -14,7 +14,7 @@ const AdminPosts = () => {
                             <li>
                                 <Form action='/adminPanel/posts' method='post'>
                                     <input type='hidden' name='postId' value={post.id}/>
-                                    <button type='submit' name='intent' value='delete'>Delete this post</button>
+                                    <button type='submit' name='intent' value='deletePost'>Delete this post</button>
                                 </Form>
                             </li>
                         </ul>
