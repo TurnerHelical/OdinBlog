@@ -9,6 +9,14 @@ async function adminAction({ request }) {
             await api({ url: `/posts/${data.postId}`, options: { method: 'DELETE' } });
         }
 
+        if (data.intent === 'approvePostAccess') {
+            const updatedData = {
+                approvePostAccess: true
+            }
+
+            await api({ url: `/users/${data.userId}`, options: { method: 'PATCH', body: updatedData } });
+        }
+
         if (data.intent === 'deleteUser') {
             await api({ url: `/users/${data.userId}`, options: { method: 'DELETE' } });
         }

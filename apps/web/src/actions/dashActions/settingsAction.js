@@ -16,6 +16,15 @@ async function settingsAction({ request }) {
             await api({ url: `/users/${user.id}`, options: { method: 'PATCH', body: updatedData } });
             return redirect('/dash');
         };
+        if (data.intent === 'requestPost') {
+            const updatedData = {
+                hasRequested: true,
+                postRequest: data.postRequest
+            }
+            await api({ url: `/users/${user.id}`, options: { method: 'PATCH', body: updatedData } });
+            return redirect('/dash/settings');
+        }
+
         if (data.intent === 'deleteAccount') {
             await api({ url: `/users/${user.id}`, options: { method: 'DELETE' } });
             return redirect('/');

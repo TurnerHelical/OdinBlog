@@ -5,6 +5,7 @@ const DashSettings = () => {
     const {profile} = useLoaderData();
     const navigation = useNavigation();
     const [dangerZone, setDangerZone] = useState(false);
+    const [requestPostAccess, setRequestPostAccess] = useState(false);
     const [confirmModal, setconfirmModal] = useState(false);
     const [updateProfile, setUpdateProfile] = useState(false);
     const [updateData, setUpdateData] = useState({bio: profile.bio, displayname: profile.displayname});
@@ -35,6 +36,17 @@ const DashSettings = () => {
                     </Form>
 
                 )
+            }
+
+            <button onClick={() => setRequestPostAccess(previous => !previous)}>Request Post Access</button>
+            {!requestPostAccess 
+                ? ('')
+                :(
+                    <Form action='/dash/settings' method='post'>
+                        <textarea name='postRequest' id='postRequest'/>
+                        <button name='intent' value='requestPost'>Request Access</button>
+                    </Form>
+                )  
             }
 
             <button onClick={() => setDangerZone(previous => !previous)}>DANGER ZONE</button>

@@ -8,7 +8,7 @@ async function getAllUsers(req, res, next) {
         if (!req.user.isAdmin) return res.status(403).json({ message: 'Forbidden' });
 
         const users = await prisma.user.findMany({
-            select: { canPost: true, displayname: true, email: true, id: true, isAdmin: true },
+            select: { canPost: true, displayname: true, email: true, id: true, isAdmin: true, hasRequested: true, postRequest: true },
             orderBy: { displayname: 'desc' },
 
         });
@@ -190,6 +190,23 @@ async function updateUserProfile(req, res, next) {
             const passwordHash = await bcrypt.hash(password, 10);
             data.passwordHash = passwordHash;
         };
+
+        const requestPostAbility = typeof req.body.hasRequested === 'boolean' || req.body.postRequest === 'string';
+        if (requestPostAbility) {
+            const hasRequested = req.body.hasRequested ?? '';
+            const postRequest = req.body.postRequest ?? '';
+
+            if (hasRequested && !postRequest) return res.status(400).json({ message: 'Please include a reason you want access' });
+            if (hasRequested && postRequest) {
+                data.hasRequested = hasRequested;
+                data.postRequest = postRequest;
+            }
+        }
+
+        const approvePostAbility = typeof req.body.approvePostAccess === 'boolean';
+        if (approvePostAbility) {
+            data.canPost = true
+        }
 
         if (Object.keys(data).length === 0) {
             return res.status(400).json({ message: "No valid fields to update" });
