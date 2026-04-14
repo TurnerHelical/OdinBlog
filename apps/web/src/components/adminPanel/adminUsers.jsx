@@ -5,7 +5,6 @@ const AdminUsers = () => {
     const users = useLoaderData();
     const [openDeleteUserId, setOpenDeleteUserId] = useState(null);
     const [openRequestUserId, setOpenRequestUserId] = useState(null);
-    console.log(users);
     return (
         <>
             {users.map(user => (
