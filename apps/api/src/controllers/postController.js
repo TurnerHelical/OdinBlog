@@ -5,14 +5,12 @@ async function getAllBlogPosts(req, res, next) {
     try {
         const currentPage = Number(req.query.page);
         const postLimit = Number(req.query.limit);
-        console.log(currentPage);
-        console.log(postLimit);
 
-        const totalPosts = await prisma.post.count({
+        const totalItems = await prisma.post.count({
             where: { published: true },
         });
 
-        const posts = await prisma.post.findMany({
+        const items = await prisma.post.findMany({
             where: {
                 published: true,
             },
@@ -26,8 +24,8 @@ async function getAllBlogPosts(req, res, next) {
             take: postLimit,
         });
         const data = {
-            totalPosts,
-            posts
+            totalItems,
+            items
         }
         return res.status(200).json(data);
     } catch (error) {
