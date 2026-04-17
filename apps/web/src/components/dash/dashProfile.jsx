@@ -15,30 +15,32 @@ return (
                 </div>
         </div>
             <div>
-                <h3>My Posts</h3>
-                <ul>
+                <h3>Recent Posts</h3>
+                
                     {!profile.posts.length > 0 
                     ? (<div><p>No posts yet</p></div>)                  
                     
                     : (profile.posts.map((post) => (
-                        <li key={post.id}>{post.title} {new Date(post.publishedAt).toLocaleDateString()}</li>
+                        <div key={post.id}>
+                            <Link to={`/blog/${post.id}`} >{post.title} {new Date(post.publishedAt).toLocaleDateString()}</Link>
+                        </div>
                     )))}
-                </ul>
+                
             </div>
 
             <div>
-                <h3>My Comments</h3>
-                <ul>
+                <h3>Recent Comments</h3>
+                
                     {!profile.comments.length > 0 
                     ? ( <div>
                         <p>No comments yet</p>               
                         </div>)
                     : (profile.comments.map((comment) => (
                         < div key={comment.id}>
-                            <p>{comment.text} {new Date(comment.createdAt).toLocaleDateString()} {comment.updatedAt !== null ? (`${(new Date(comment.updatedAt).toLocaleDateString())}`):('')}</p>
+                            <Link to={`/blog/${comment.postId}`}>{comment.text} {new Date(comment.createdAt).toLocaleDateString()} {comment.updatedAt !== null ? (`${(new Date(comment.updatedAt).toLocaleDateString())}`):('')}</Link>
                         </div>
                     )))}
-                </ul>
+                
             </div>
     </>
     )

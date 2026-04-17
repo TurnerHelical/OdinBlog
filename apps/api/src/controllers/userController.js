@@ -39,9 +39,6 @@ async function getPostsByUser(req, res, next) {
         const userId = Number(req.params.userId);
         const currentPage = Number(req.query.page);
         const postLimit = Number(req.query.limit);
-        console.log(userId);
-        console.log(currentPage);
-        console.log(postLimit);
         const totalItems = await prisma.post.count({
             where: { userId: userId },
         });

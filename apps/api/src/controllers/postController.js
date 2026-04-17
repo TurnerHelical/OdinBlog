@@ -61,7 +61,17 @@ async function createPost(req, res, next) {
 async function getMyPosts(req, res, next) {
     try {
         if (!req.user) return res.status(401).json({ message: 'Unauthorized' })
-        const posts = await prisma.post.findMany({
+        const currentPage = Number(req.query.page);
+        const postLimit = Number(req.query.limit);
+
+        const totalItems = await prisma.post.count({
+            where: {
+                userId: req.user.id,
+                published: true,
+            }
+        });
+
+        const items = await prisma.post.findMany({
             where: {
                 userId: req.user.id,
                 published: true,
@@ -69,8 +79,15 @@ async function getMyPosts(req, res, next) {
             orderBy: {
                 publishedAt: 'desc',
             },
+            skip: (currentPage - 1) * postLimit,
+            take: postLimit,
         });
-        return res.status(200).json(posts);
+
+        const data = {
+            totalItems,
+            items,
+        }
+        return res.status(200).json(data);
     } catch (err) {
         return next(err);
     }
@@ -79,7 +96,20 @@ async function getMyPosts(req, res, next) {
 async function getMyDrafts(req, res, next) {
     try {
         if (!req.user) return res.status(401).json({ message: 'Unauthorized' })
-        const drafts = await prisma.post.findMany({
+
+        const currentPage = Number(req.query.page);
+        const draftLimit = Number(req.query.limit);
+
+        const totalItems = await prisma.post.count({
+            where: {
+                userId: req.user.id,
+                published: false,
+            }
+        });
+
+
+
+        const items = await prisma.post.findMany({
             where: {
                 userId: req.user.id,
                 published: false,
@@ -87,8 +117,16 @@ async function getMyDrafts(req, res, next) {
             orderBy: {
                 createdAt: 'desc'
             },
+            skip: (currentPage - 1) * draftLimit,
+            take: draftLimit,
         });
-        return res.status(200).json(drafts);
+
+        const data = {
+            totalItems,
+            items,
+        }
+
+        return res.status(200).json(data);
     } catch (err) {
         return next(err);
     }

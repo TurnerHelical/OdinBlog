@@ -2,7 +2,7 @@ import {Link} from 'react-router';
 
 const Pagination = ({currentPage, totalPages, url}) => {
     const pageLinks = [];
-    
+
     for (let i = 1; i <= totalPages; i++) {
         i === currentPage
             ? (pageLinks.push(<p key={i}><strong>{`${i}`}</strong></p>))
@@ -10,12 +10,18 @@ const Pagination = ({currentPage, totalPages, url}) => {
         }
     
     return (
-        <div>
+
+            <>
+                
+                <div>
                 {currentPage > 1 && (
                     <Link to={`${url}?page=${currentPage - 1}`}>&lt;</Link>
                 )}
 
-                {pageLinks}
+                {totalPages === 1 
+                    ?('')
+                    :(pageLinks)
+                }
                     
                 
 
@@ -24,6 +30,8 @@ const Pagination = ({currentPage, totalPages, url}) => {
                 )}                  
                 
             </div>
+                
+            </>
     )
 }
 

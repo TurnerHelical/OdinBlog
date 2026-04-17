@@ -1,4 +1,5 @@
 import {useLoaderData, Link} from 'react-router';
+import {Pagination} from '../layout/pagination';
 
 const DashDrafts = () => {
     const data = useLoaderData();
@@ -6,8 +7,8 @@ const DashDrafts = () => {
         <>
             <h2>My Drafts</h2>
             <div>
-                {data.length > 0 
-                ?(data.map(post => (
+                {data.items.length > 0 
+                ?(data.items.map(post => (
 
                     <Link key={post.id} to={`/dash/editPost/${post.id}`}>
                         <div>
@@ -21,6 +22,10 @@ const DashDrafts = () => {
                 </>)
             }
             </div>
+            <Pagination 
+                currentPage={data.pageNumber}
+                totalPages={data.pages}
+                url='/dash/drafts' />
         
         </>
     )

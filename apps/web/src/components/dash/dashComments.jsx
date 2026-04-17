@@ -6,8 +6,8 @@ const DashComments = () => {
         <>
             <div>
                 <h2>My Comments</h2>
-                {data.length > 0 
-                    ? (data.map(comment => (
+                {data.items.length > 0 
+                    ? (data.items.map(comment => (
                         <div key={comment.id}>
                             <Link to={`/blog/${comment.postId}`}>
                                 <p>{comment.text}</p>

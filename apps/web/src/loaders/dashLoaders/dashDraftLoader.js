@@ -1,9 +1,10 @@
-import { api } from '../../helpers/apiHelper';
+import { pagination } from '../../helpers/pagination';
 
-async function draftLoader() {
+async function draftLoader({ request }) {
     try {
-        const drafts = await api({ url: '/posts/drafts' });
-        return drafts
+        const data = await pagination(request, '/posts/drafts', 1, 7);
+        console.log(data);
+        return data
     } catch (err) {
 
     }

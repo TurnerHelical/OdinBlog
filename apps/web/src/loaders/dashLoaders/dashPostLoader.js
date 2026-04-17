@@ -1,9 +1,9 @@
-import { api } from '../../helpers/apiHelper';
+import { pagination } from '../../helpers/pagination';
 
-async function myPostLoader() {
+async function myPostLoader({ request }) {
     try {
-        const posts = await api({ url: '/posts/mine' });
-        return posts
+        const data = await pagination(request, `/posts/mine`, 1, 7);
+        return data
     } catch (error) {
 
     }

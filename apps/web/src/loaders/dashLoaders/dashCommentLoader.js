@@ -1,9 +1,9 @@
-import { api } from '../../helpers/apiHelper';
+import { pagination } from '../../helpers/pagination';
 
-async function commentLoader() {
+async function commentLoader({ request }) {
     try {
-        const comments = await api({ url: '/comments/mine' });
-        return comments
+        const data = await pagination(request, '/comments/mine', 1, 7);
+        return data
     } catch (error) {
 
     }

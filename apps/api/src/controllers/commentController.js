@@ -149,12 +149,28 @@ async function deleteComment(req, res, next) {
 async function getMyComments(req, res, next) {
     try {
         if (!req.user) return res.status(401).json({ message: 'Unauthorized' });
-        const myComments = await prisma.comment.findMany({
+        const currentPage = Number(req.query.page);
+        const commentLimit = Number(req.query.limit);
+
+        const totalItems = await prisma.comment.count({
+            where: {
+                userId: req.user.id,
+            }
+        })
+
+        const items = await prisma.comment.findMany({
             where: { userId: req.user.id },
             orderBy: { createdAt: 'desc' },
-
+            skip: (currentPage - 1) * commentLimit,
+            take: commentLimit,
         });
-        return res.status(200).json(myComments);
+
+        const data = {
+            items,
+            totalItems
+        }
+
+        return res.status(200).json(data);
     } catch (err) {
         return next(err)
     }
