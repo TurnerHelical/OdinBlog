@@ -3,16 +3,29 @@ import bcrypt from 'bcrypt';
 
 async function getAllUsers(req, res, next) {
     try {
+        const currentPage = Number(req.query.page);
+        const postLimit = Number(req.query.limit);
+
+        const totalItems = await prisma.user.count();
+
         if (!req.user) return res.status(401).json({ message: 'Unauthorized' });
 
         if (!req.user.isAdmin) return res.status(403).json({ message: 'Forbidden' });
 
-        const users = await prisma.user.findMany({
+        const items = await prisma.user.findMany({
             select: { canPost: true, displayname: true, email: true, id: true, isAdmin: true, hasRequested: true, postRequest: true },
             orderBy: { displayname: 'desc' },
+            skip: (currentPage - 1) * postLimit,
+            take: postLimit,
 
         });
-        return res.status(200).json(users);
+
+        const data = {
+            totalItems,
+            items
+        }
+
+        return res.status(200).json(data);
     } catch (err) {
         return next(err);
     }

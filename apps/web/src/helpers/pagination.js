@@ -17,6 +17,7 @@ async function pagination(request, apiUrl, defaultPage, defaultLimit) {
         const pages = Math.ceil(totalItems / limit);
         const items = dbData.items
         const data = { pages, pageNumber, items };
+
         return data;
     } catch (error) {
 

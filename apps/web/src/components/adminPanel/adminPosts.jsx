@@ -1,11 +1,12 @@
 import {useLoaderData, Link, Form} from 'react-router';
+import {Pagination} from '../layout/pagination';
 
 const AdminPosts = () => {
-    const posts = useLoaderData();
+    const data = useLoaderData();
     return (
         <>
             <div>
-                {posts.map(post => (
+                {data.items.map(post => (
                     <div key={post.id}>
                         <ul>
                             <li><Link to={`/blog/${post.id}`} target='_blank' rel='noopener noreferer'>{post.title}</Link></li>
@@ -20,7 +21,13 @@ const AdminPosts = () => {
                         </ul>
                     </div>
                 ))}
+                <Pagination
+                    currentPage={data.pageNumber}
+                    totalPages={data.pages}
+                    url='/adminPanel/posts'
+                    />
             </div>
+
         </>
     )
 }

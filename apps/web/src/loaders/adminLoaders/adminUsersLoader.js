@@ -2,8 +2,9 @@ import { pagination } from '../../helpers/pagination';
 
 async function adminUsersLoader({ request }) {
     try {
-        const users = await pagination(request, '/users', 1, 20);
-        return users;
+        const data = await pagination(request, '/users', 1, 20);
+
+        return data;
     } catch (error) {
 
     }

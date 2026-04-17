@@ -1,13 +1,15 @@
 import {useLoaderData, Form} from 'react-router';
-import {useState} from 'react'
+import {useState} from 'react';
+import {Pagination} from '../layout/pagination';
 
 const AdminUsers = () => {
-    const users = useLoaderData();
+    const data = useLoaderData();
     const [openDeleteUserId, setOpenDeleteUserId] = useState(null);
     const [openRequestUserId, setOpenRequestUserId] = useState(null);
+
     return (
         <>
-            {users.map(user => (
+            {data.items.map(user => (
                 <div key={user.id}>
                     <ul>
                         <li>{user.displayname}</li>
@@ -35,6 +37,10 @@ const AdminUsers = () => {
                     </ul>
                 </div>
             ))}
+            <Pagination
+                currentPage={data.pageNumber}
+                totalPages={data.pages}
+                url='/adminPanel' />
         </>
 
     )
