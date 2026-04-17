@@ -17,12 +17,14 @@ const Home = () => {
                     <li key={post.id}><Link to={`blog/${post.id}`}>{post.title} {post.user?.displayname ? post.user.displayname : 'User Deleted'} {new Date(post.publishedAt).toLocaleDateString()}</Link></li>
                 ))}
             </ul>
+            <>
             <Pagination 
                 currentPage={data.pageNumber}
                 totalPages={data.pages}
                 url='/'
                 
                 />
+            </>
             
         </>
     )

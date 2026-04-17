@@ -1,7 +1,8 @@
 import {Link} from 'react-router';
 
-const Pagination = (currentPage, totalPages, url) => {
+const Pagination = ({currentPage, totalPages, url}) => {
     const pageLinks = [];
+    
     for (let i = 1; i <= totalPages; i++) {
         i === currentPage
             ? (pageLinks.push(<p key={i}><strong>{`${i}`}</strong></p>))
