@@ -1,10 +1,10 @@
-import { api } from '../helpers/apiHelper';
+import { pagination } from '../helpers/pagination';
 
-async function userCommentsLoader({ params }) {
+async function userCommentsLoader({ params, request }) {
     try {
         const userId = params.userId;
-        const comments = await api({ url: `/users/${userId}/comments` });
-        return comments;
+        const data = await pagination(request, `/users/${userId}/comments`, 1, 10);
+        return data;
     } catch (error) {
 
     }

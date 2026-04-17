@@ -72,10 +72,15 @@ async function getPostsByUser(req, res, next) {
 async function getCommentsByUser(req, res, next) {
     try {
         if (!req.user) return res.status(401).json({ message: 'Unauthorized' });
-
+        const currentPage = Number(req.query.page);
+        const postLimit = Number(req.query.limit);
         const userId = Number(req.params.userId);
 
         if (!Number.isInteger(userId) || userId <= 0) return res.status(400).json({ message: 'Invalid user id' });
+
+        const totalItems = await prisma.comment.count({
+            where: { userId: userId },
+        });
 
         const comments = await prisma.comment.findMany({
             where: {
@@ -91,10 +96,12 @@ async function getCommentsByUser(req, res, next) {
             orderBy: {
                 createdAt: 'desc',
             },
+            skip: (currentPage - 1) * postLimit,
+            take: postLimit,
         });
         const PREVIEW_LEN = 100;
 
-        const previewComments = comments.map(c => ({
+        const items = comments.map(c => ({
             id: c.id,
             createdAt: c.createdAt,
             updatedAt: c.updatedAt,
@@ -103,8 +110,12 @@ async function getCommentsByUser(req, res, next) {
                 ? c.text.slice(0, PREVIEW_LEN) + '...'
                 : c.text,
         }));
+        const data = {
+            items,
+            totalItems,
+        }
 
-        return res.status(200).json(previewComments);
+        return res.status(200).json(data);
 
     } catch (err) {
         return next(err);
