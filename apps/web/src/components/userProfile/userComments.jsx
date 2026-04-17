@@ -1,8 +1,8 @@
 import {useLoaderData, useRouteLoaderData, Link} from 'react-router';
+import {Pagination} from '../layout/pagination';
 
 const UserComments = () => {
     const data = useLoaderData();
-    console.log(data);
     const profileData = useRouteLoaderData('profileRoot');
     return (
         <>
@@ -22,6 +22,10 @@ const UserComments = () => {
                 }
 
             </div>
+            <Pagination
+                currentPage={data.pageNumber}
+                totalPages={data.page}
+                url={`/user/${profileData.id}/comments`} />
         </>
     )
 }

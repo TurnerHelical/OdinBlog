@@ -37,6 +37,15 @@ async function getPostsByUser(req, res, next) {
         if (!req.user) return res.status(401).json({ message: 'Unauthorized' });
 
         const userId = Number(req.params.userId);
+        const currentPage = Number(req.query.page);
+        const postLimit = Number(req.query.limit);
+        console.log(userId);
+        console.log(currentPage);
+        console.log(postLimit);
+        const totalItems = await prisma.post.count({
+            where: { userId: userId },
+        });
+
 
         if (!Number.isInteger(userId) || userId <= 0) {
             return res.status(400).json({ message: 'Invalid userId' });
@@ -55,14 +64,21 @@ async function getPostsByUser(req, res, next) {
             orderBy: {
                 publishedAt: 'desc',
             },
+            skip: (currentPage - 1) * postLimit,
+            take: postLimit,
         });
 
-        const previewPosts = posts.map(post => ({
+        const items = posts.map(post => ({
             id: post.id,
             title: post.title,
             publishedAt: post.publishedAt,
         }));
-        return res.status(200).json(previewPosts);
+
+        const data = {
+            items,
+            totalItems,
+        }
+        return res.status(200).json(data);
 
     } catch (err) {
         return next(err)
