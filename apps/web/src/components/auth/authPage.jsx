@@ -3,11 +3,11 @@ import {useFormValidation} from '../../hooks/useFormValidation';
 
 
 const validateLogin = (values) => {
-        const newErrors = {email: '', password:''};
+        const newErrors = {email: '', password:''}
 
         if (!values.email.trim()) {
             newErrors.email = 'Email is required'
-        } else if (!!/^\S+@\S+\.\S+$/.test(values.email)) {
+        } else if (!/^\S+@\S+\.\S+$/.test(values.email)) {
             newErrors.email = 'Please enter a valid email';
         }
 
@@ -127,7 +127,7 @@ const Auth = () => {
                         onBlur={registerForm.handleBlur}
                         placeholder='Username'
                         type='text'/>
-                        {registerForm.registerTouched.displayname && registerForm.registerErrors.displayname && (
+                        {registerForm.touched.displayname && registerForm.errors.displayname && (
                         <p>{registerForm.errors.displayname}</p>
                         )};
                     <input 
@@ -139,7 +139,7 @@ const Auth = () => {
                         onChange={registerForm.handleChange}
                         onBlur={registerForm.handleBlur}
                         />
-                        {registerForm.registerTouched.email && registerForm.registerErrors.email && (
+                        {registerForm.touched.email && registerForm.errors.email && (
                         <p>{registerForm.errors.email}</p>
                         )};
                     <input 
@@ -151,7 +151,7 @@ const Auth = () => {
                         onChange={registerForm.handleChange}
                         onBlur={registerForm.handleBlur}
                         />
-                        {registerForm.registerTouched.password && registerForm.registerErrors.password && (
+                        {registerForm.touched.password && registerForm.errors.password && (
                         <p>{registerForm.errors.password}</p>
                         )};
                     <input 
@@ -163,7 +163,7 @@ const Auth = () => {
                         onChange={registerForm.handleChange}
                         onBlur={registerForm.handleBlur}
                         />
-                        {registerForm.registerTouched.confirmPassword && registerForm.registerErrors.confirmPassword && (
+                        {registerForm.touched.confirmPassword && registerForm.errors.confirmPassword && (
                         <p>{registerForm.errors.confirmPassword}</p>
                         )};
                     <button type='submit' name='intent' value='register'>Submit</button>
