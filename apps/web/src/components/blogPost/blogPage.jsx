@@ -1,14 +1,30 @@
 import {useLoaderData, Link, Form, useNavigation, useRouteLoaderData} from 'react-router';
 import {useEffect, useState, useRef} from 'react';
+import { useFormValidation } from '../../hooks/useFormValidation';
+
+const validateComment = (values) => {
+    const newErrors = {text: ''};
+
+    if (!values.text.trim()) {
+        newErrors.text = 'Comment can"t be empty';
+    } else if (values.text.length > 500) {
+        newErrors.text = 'Comments must be 500 characters or less';
+    }
+    return newErrors;
+}
 
 const BlogPage = () => {
     const post = useLoaderData();
     const navigation = useNavigation();
     const rootData = useRouteLoaderData('root')
     const [commentOpen, setCommentOpen] = useState(false);
-    const [commentText, setCommentText] = useState('');
     const wasSubmittingRef = useRef(false);
     const user = rootData.user?.user;
+
+    const commentForm = useFormValidation(
+        {text:''},
+        validateComment
+    );
 
     
 
@@ -18,7 +34,7 @@ const BlogPage = () => {
         }
 
         if (wasSubmittingRef.current && navigation.state === 'idle') {
-            setCommentText('');
+            commentForm.resetForm();
             wasSubmittingRef.current = false;
         }
     }, [navigation.state]); 
@@ -36,14 +52,20 @@ const BlogPage = () => {
                 {commentOpen ?
                 (<div>
                     {!user ? (<p>Please login before commenting!</p>)
-                    :<Form action={`/blog/${post.id}`} method='post'>
-                        <textarea name='text' id='text' placeholder='Enter Comment Text' value={commentText} onChange={(e) => setCommentText(e.target.value)} />
+                    :<Form action={`/blog/${post.id}`} method='post' onSubmit={commentForm.handleSubmit}>
+                        <textarea name='text' id='text' placeholder='Enter Comment Text' value={commentForm.values.text} onChange={commentForm.handleChange} onBlur={commentForm.handleBlur}/>
+                        <p>{commentForm.values.text.length}/500</p>
                         <input type='hidden' name='postId' value={post.id}></input>
                         <button type='submit' disabled={navigation.state !== 'idle'}>{navigation.state === 'submitting' ? 'Posting....' : 'Post Comment'}</button>
+                        {commentForm.touched.text && commentForm.errors.text && (
+                        <p>{commentForm.errors.text}</p>
+                    )}
                     </Form>}
+                    
                 </div>)
                 : ('')
                 }
+                
             </div>
             <div>
                 
