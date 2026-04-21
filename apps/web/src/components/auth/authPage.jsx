@@ -110,7 +110,7 @@ const Auth = () => {
                         />
                         {loginForm.touched.password && loginForm.errors.password && (
                             <p>{loginForm.errors.password}</p>
-                        )};
+                        )}
                 </div>
                     <button type='submit' name='intent' value='login'>Submit</button>
                 
@@ -129,7 +129,7 @@ const Auth = () => {
                         type='text'/>
                         {registerForm.touched.displayname && registerForm.errors.displayname && (
                         <p>{registerForm.errors.displayname}</p>
-                        )};
+                        )}
                     <input 
                         name='email' 
                         id='registerEmail' 
@@ -141,7 +141,7 @@ const Auth = () => {
                         />
                         {registerForm.touched.email && registerForm.errors.email && (
                         <p>{registerForm.errors.email}</p>
-                        )};
+                        )}
                     <input 
                         name='password' 
                         id='registerPassword' 
@@ -153,7 +153,7 @@ const Auth = () => {
                         />
                         {registerForm.touched.password && registerForm.errors.password && (
                         <p>{registerForm.errors.password}</p>
-                        )};
+                        )}
                     <input 
                         name='confirmPassword' 
                         id='confirmPassword' 
@@ -165,7 +165,7 @@ const Auth = () => {
                         />
                         {registerForm.touched.confirmPassword && registerForm.errors.confirmPassword && (
                         <p>{registerForm.errors.confirmPassword}</p>
-                        )};
+                        )}
                     <button type='submit' name='intent' value='register'>Submit</button>
                 </Form>
             </div>

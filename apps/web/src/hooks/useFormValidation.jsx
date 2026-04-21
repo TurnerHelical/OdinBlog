@@ -9,7 +9,7 @@ const useFormValidation = (initialValues, validate) => {
     ));
 
     const handleChange = (e) => {
-        const [name, value] = e.target;
+        const {name, value} = e.target;
 
         const updatedValues = {
             ...values,

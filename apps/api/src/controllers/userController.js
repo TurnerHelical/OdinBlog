@@ -239,10 +239,32 @@ async function updateUserProfile(req, res, next) {
                 data.postRequest = postRequest;
             }
         }
+        const givePostAbility = typeof req.body.givePostAbility === 'boolean';
+        if (givePostAbility) {
+            data.canPost = true
+            data.hasRequested = false
+            data.postRequest = null
+        }
+
+        const removePostAbility = typeof req.body.removePostAbility === 'boolean';
+        if (removePostAbility) {
+            data.canPost = false
+            data.hasRequested = false
+            data.postRequest = null
+
+        }
 
         const approvePostAbility = typeof req.body.approvePostAccess === 'boolean';
         if (approvePostAbility) {
             data.canPost = true
+            data.hasRequested = false
+            data.postRequest = null
+        }
+        const denyPostAbility = typeof req.body.denyPostAccess === 'boolean';
+        if (denyPostAbility) {
+            data.hasRequested = false
+            data.postRequest = null
+
         }
 
         if (Object.keys(data).length === 0) {
