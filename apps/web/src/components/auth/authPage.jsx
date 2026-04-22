@@ -1,4 +1,5 @@
-import {Form, useRouteLoaderData} from 'react-router';
+import {Form, useRouteLoaderData, useNavigation, useActionData} from 'react-router';
+import {useState} from 'react';
 import {useFormValidation} from '../../hooks/useFormValidation';
 
 
@@ -53,7 +54,9 @@ const validateLogin = (values) => {
 const Auth = () => {
     const rootData = useRouteLoaderData('root');
     const user = rootData.user;
-    
+    const navigation = useNavigation();
+    const actionData = useActionData();
+
     const loginForm = useFormValidation(
         {email: '', password: ''},
         validateLogin
@@ -68,6 +71,14 @@ const Auth = () => {
         },
         validateRegister
     );
+
+    const isSubmitting = navigation.state !== 'idle';
+    const loginServerError = 
+        actionData?.intent === 'login' ? actionData.message : '';
+
+    const registerServerError = 
+        actionData?.intent === 'register' ? actionData.message : '';
+    
     
     
     
@@ -77,11 +88,19 @@ const Auth = () => {
                 <Form action='/auth' method='post'>
                     <h2>Already logged in</h2>
                     
-                    <button type='submit' name='intent' value='logout'>Logout?</button>
+                    <button 
+                        type='submit' 
+                        disabled={isSubmitting} 
+                        name='intent' 
+                        value='logout'
+                        >{isSubmitting ? 'Logging Out....' : 'Logout'}
+                    </button>
                 </Form>
             ) : (
             <>
             <div>
+                {loginServerError && <p>{loginServerError}</p>}
+
                 <Form action='/auth' method='post' onSubmit={loginForm.handleSubmit}>
                 <div> 
                     <input 
@@ -112,12 +131,18 @@ const Auth = () => {
                             <p>{loginForm.errors.password}</p>
                         )}
                 </div>
-                    <button type='submit' name='intent' value='login'>Submit</button>
+                    <button type='submit' 
+                        name='intent' 
+                        value='login'
+                        disabled={isSubmitting}
+                        >{isSubmitting ? 'Logging In...' : 'Login'}
+                    </button>
                 
                 </Form>
             </div>
 
             <div>
+                {registerServerError && <p>{registerServerError}</p>}
                 <Form action='/auth' method='post' onSubmit={registerForm.handleSubmit}>
                     <input 
                         name='displayname' 
@@ -166,7 +191,12 @@ const Auth = () => {
                         {registerForm.touched.confirmPassword && registerForm.errors.confirmPassword && (
                         <p>{registerForm.errors.confirmPassword}</p>
                         )}
-                    <button type='submit' name='intent' value='register'>Submit</button>
+                    <button type='submit' 
+                        name='intent' 
+                        value='register'
+                        disabled={isSubmitting}
+                        >{isSubmitting ? 'Registering...' : 'Register'}
+                    </button>
                 </Form>
             </div>
             </>
