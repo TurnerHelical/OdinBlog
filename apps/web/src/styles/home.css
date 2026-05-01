@@ -1,7 +1,49 @@
-modal {
-  color: red;
+.content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 50%;
+  margin: var(--space-xl);
+  text-align: center;
 }
 
-.disabled {
-  display: none;
+h2 {
+  font-size: var(--text-2xl);
+}
+
+.cardContainer {
+  margin-top: var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.postCard {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--color-surface-light);
+  padding: var(--space-sm) var(--space-xl);
+  border: 1px white solid;
+  border-radius: 10px;
+  box-shadow: 0 0 5px whitesmoke;
+  gap: var(--space-sm);
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.postCard div {
+  display: flex;
+  justify-content: center;
+  gap: var(--space-md);
+}
+
+.postCard p {
+  width: 100%;
+}
+
+.postCard:hover {
+  box-shadow: none;
+  background-color: var(--color-surface);
+  color: var(--color-text-muted);
 }

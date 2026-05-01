@@ -167,3 +167,18 @@ textarea:focus {
 .text-center {
   text-align: center;
 }
+
+main {
+  display: grid;
+  grid-template: 1fr / 0.5fr 2fr 0.5fr;
+}
+
+.contentBox {
+  grid-area: 1 / 2 / 2 / 3;
+  display: flex;
+  justify-content: center;
+}
+
+.pageTitle {
+  font-size: var(--text-2xl);
+}

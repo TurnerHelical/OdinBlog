@@ -10,23 +10,29 @@ const Home = () => {
     const data = useLoaderData();
     
     return (
-        <>
-            <h2>This is my home page there will be blog posts here</h2>
-            <ul>
+        <div className='content'>
+            <h2 className='pageTitle'>Blog Posts</h2>
+            <div className='cardContainer'>
                 {data.items.map(post => (
-                    <li key={post.id}><Link to={`blog/${post.id}`}>{post.title} {post.user?.displayname ? post.user.displayname : 'User Deleted'} {new Date(post.publishedAt).toLocaleDateString()}</Link></li>
+                    <Link to={`blog/${post.id}`} key={post.id} className='postCard'>
+                        <h3>{post.title}</h3>
+                        <div>
+                            <p>{post.user?.displayname ? post.user.displayname : 'User Deleted'}</p>
+                            <p>{new Date(post.publishedAt).toLocaleDateString()}</p>
+                        </div>
+                    </Link>
                 ))}
-            </ul>
-            <>
+            </div>
+            
             <Pagination 
                 currentPage={data.pageNumber}
                 totalPages={data.pages}
                 url='/'
                 
                 />
-            </>
             
-        </>
+            
+        </div>
     )
 }
 

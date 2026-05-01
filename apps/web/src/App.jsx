@@ -8,7 +8,9 @@ function App() {
       <Header />
     </header>
     <main>
-      <Outlet />
+      <div className="contentBox">
+        <Outlet />
+      </div>
     </main>
     </>
   )
