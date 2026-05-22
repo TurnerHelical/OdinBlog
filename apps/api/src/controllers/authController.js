@@ -4,26 +4,7 @@ import auth from '../auth/jwt.js';
 
 async function register(req, res, next) {
     try {
-        const { email, password, confirmPassword, displayname } = req.body;
-
-
-        if (
-            typeof email !== "string" ||
-            typeof password !== "string" ||
-            typeof confirmPassword !== "string" ||
-            typeof displayname !== "string"
-        ) {
-            return res.status(400).json({ message: "All fields are required" });
-        }
-
-        if (password !== confirmPassword) {
-            return res.status(400).json({ message: "Passwords need to match" });
-        }
-
-        const trimmedDisplayname = displayname.trim();
-        if (!trimmedDisplayname.length) {
-            return res.status(400).json({ message: "Display name cannot be blank" });
-        }
+        const { email, password, displayname } = req.body;
 
 
         const passwordHash = await bcrypt.hash(password, 10);
@@ -33,7 +14,7 @@ async function register(req, res, next) {
             data: {
                 email,
                 passwordHash,
-                displayname: trimmedDisplayname,
+                displayname,
             },
             select: {
                 id: true,
@@ -81,10 +62,6 @@ async function register(req, res, next) {
 async function login(req, res, next) {
     try {
         const { email, password } = req.body;
-
-        if (typeof email !== 'string' || typeof password !== 'string') {
-            return res.status(400).json({ message: 'Email and password required' });
-        };
 
         const user = await prisma.user.findUnique({
             where: { email },
