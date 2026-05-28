@@ -182,3 +182,10 @@ main {
 .pageTitle {
   font-size: var(--text-2xl);
 }
+
+.pages {
+  display: flex;
+  justify-content: center;
+  margin-top: var(--space-md);
+  gap: var(--space-sm);
+}

@@ -1,5 +1,5 @@
 import { body } from 'express-validator';
-import { containsBlockedWord } from '../moderation/containsBlockedWord';
+import { containsBlockedWord } from '../moderation/containsBlockedWord.js';
 
 const commentValidation = [
     body('text')
@@ -14,3 +14,4 @@ const commentValidation = [
         })
 ];
 
+export { commentValidation };

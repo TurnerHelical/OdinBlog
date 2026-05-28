@@ -13,7 +13,7 @@ const Pagination = ({currentPage, totalPages, url}) => {
 
             <>
                 
-                <div>
+                <div className='pages'>
                 {currentPage > 1 && (
                     <Link to={`${url}?page=${currentPage - 1}`}>&lt;</Link>
                 )}

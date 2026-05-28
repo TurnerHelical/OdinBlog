@@ -8,10 +8,12 @@ function normalize(str) {
         .replace(/[^a-z0-9]/g, "");
 }
 
-export default function containsBlockedWord(input) {
+function containsBlockedWord(input) {
     const normalizedInput = normalize(input);
 
     return blockedTerms.some(term =>
         normalizedInput.includes(normalize(term))
     );
 }
+
+export { containsBlockedWord };

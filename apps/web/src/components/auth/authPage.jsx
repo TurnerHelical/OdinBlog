@@ -28,23 +28,27 @@ const validateLogin = (values) => {
 
         if (!values.displayname.trim()) {
             newErrors.displayname = 'Please enter a username';
+        } else if (values.displayname.trim().length > 30) {
+            newErrors.displayname = 'Username must be 30 characters or less'
         }
         if (!values.email.trim()) {
             newErrors.email = 'Email is required';
         } else if (!/^\S+@\S+\.\S+$/.test(values.email)) {
             newErrors.email = 'Please enter a valid email address';
-        }
+        } 
 
         if (!values.password.trim()) {
             newErrors.password = 'Password is required';
         } else if (values.password.length < 8) {
             newErrors.password = 'Password must be at least 8 characters';
+        } else if (values.password.length > 72) {
+            newErrors.password = 'Password must be less than 72 characters'
         }
 
         if (!values.confirmPassword.trim()) {
             newErrors.confirmPassword = 'Both password fields are required';
         } else if (values.confirmPassword !== values.password) {
-            newErrors.confirmPassword = 'Password do not match';
+            newErrors.confirmPassword = 'Passwords do not match';
         }
 
         return newErrors;

@@ -17,8 +17,8 @@ const Home = () => {
                     <Link to={`blog/${post.id}`} key={post.id} className='postCard'>
                         <h3>{post.title}</h3>
                         <div>
-                            <p>{post.user?.displayname ? post.user.displayname : 'User Deleted'}</p>
-                            <p>{new Date(post.publishedAt).toLocaleDateString()}</p>
+                            <p className='posterName'>{post.user?.displayname ? post.user.displayname : 'User Deleted'}</p>
+                            <p className='postDate'>{new Date(post.publishedAt).toLocaleDateString()}</p>
                         </div>
                     </Link>
                 ))}

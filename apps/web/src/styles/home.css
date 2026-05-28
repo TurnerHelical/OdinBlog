@@ -27,9 +27,12 @@ h2 {
   border-radius: 10px;
   box-shadow: 0 0 5px whitesmoke;
   gap: var(--space-sm);
+}
+
+.postCard h3 {
   white-space: nowrap;
-  text-overflow: ellipsis;
   overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .postCard div {
@@ -48,4 +51,23 @@ h2 {
   color: var(--color-text-muted);
 }
 
+.posterName {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 
+@media (width <= 1024px) {
+  .content {
+    width: 100%;
+  }
+}
+
+@media (width <= 500px) {
+  .content {
+    margin: var(--space-xl) var(--space-sm);
+  }
+  .postCard {
+    padding: var(--space-md);
+  }
+}
