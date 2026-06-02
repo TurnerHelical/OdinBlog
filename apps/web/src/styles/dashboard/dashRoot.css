@@ -1,8 +1,22 @@
 .rootBox {
-  display: grid;
-  grid-template: 1fr / 1fr 5fr 1fr;
-  gap: var(--space-md);
   padding: var(--space-xl);
+}
+
+.dashNav {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-md);
+}
+
+.dashNav a {
+  background-color: var(--color-surface-light);
+  border: 1px solid white;
+  border-radius: var(--radius-sm);
+  padding: 0 var(--space-sm);
+  width: 140px;
+  text-align: center;
+  box-shadow: 0 0 5px white;
 }
 
 aside {
@@ -16,6 +30,7 @@ aside {
   height: fit-content;
   gap: var(--space-md);
   background-color: var(--color-surface-light);
+  white-space: nowrap;
 }
 
 .dashContent {
@@ -26,5 +41,20 @@ aside {
 }
 
 div h2 {
-  margin-bottom: var(--space-lg);
+  margin: var(--space-lg) 0;
+}
+
+.dashNav a:hover {
+  background-color: var(--color-surface);
+  box-shadow: none;
+  color: var(--color-text-muted);
+}
+
+@media (width <= 1024px) {
+  .rootBox {
+    padding: var(--space-lg) 0;
+  }
+  .dashNav {
+    padding: 0 var(--space-sm);
+  }
 }

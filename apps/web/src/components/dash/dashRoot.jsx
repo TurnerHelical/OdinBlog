@@ -10,7 +10,7 @@ const DashRoot = () => {
     return (
 
         <div className='rootBox'>
-            <aside>
+            <div className='dashNav'>
                 
                     <Link to='/dash'>Profile</Link>
                     {data.canPost ? (
@@ -26,7 +26,7 @@ const DashRoot = () => {
                     <Link to='/dash/comments'>My Comments</Link>
                     <Link to='/dash/settings'>Account Settings</Link>
                 
-            </aside>
+            </div>
             <div className='dashContent'>
                 <h2>{data.displayname}'s Dash</h2>
                 <Outlet/>

@@ -5,11 +5,10 @@
 }
 
 .bio {
-  background-color: var(--color-surface-light);
-  width: 50%;
+  background-color: var(--color-surface);
+  width: 75%;
   border: 1px solid white;
   border-radius: var(--radius-md);
-  box-shadow: 0 0 4px white;
   padding: var(--space-sm);
   min-height: var(--space-xl);
 }
@@ -46,4 +45,10 @@ h3 {
   box-shadow: none;
   background-color: var(--color-surface);
   color: var(--color-primary);
+}
+
+@media (width <= 1024px) {
+  .recents {
+    width: 60%;
+  }
 }

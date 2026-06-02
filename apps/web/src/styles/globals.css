@@ -189,3 +189,9 @@ main {
   margin-top: var(--space-md);
   gap: var(--space-sm);
 }
+
+@media (width <= 1024px) {
+  main {
+    display: block;
+  }
+}
