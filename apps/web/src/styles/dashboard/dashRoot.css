@@ -1,0 +1,30 @@
+.rootBox {
+  display: grid;
+  grid-template: 1fr / 1fr 5fr 1fr;
+  gap: var(--space-md);
+  padding: var(--space-xl);
+}
+
+aside {
+  display: flex;
+  flex-direction: column;
+  margin-top: var(--space-xl);
+  border: 1px solid white;
+  border-radius: var(--radius-sm);
+  text-align: center;
+  padding: var(--space-md);
+  height: fit-content;
+  gap: var(--space-md);
+  background-color: var(--color-surface-light);
+}
+
+.dashContent {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+}
+
+div h2 {
+  margin-bottom: var(--space-lg);
+}

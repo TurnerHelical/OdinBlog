@@ -1,3 +1,4 @@
+import '../../styles/dashboard/dashRoot.css'
 import {Outlet, Link, useLoaderData} from 'react-router';
 
 
@@ -8,8 +9,8 @@ const DashRoot = () => {
     
     return (
 
-        <>
-            <div>
+        <div className='rootBox'>
+            <aside>
                 
                     <Link to='/dash'>Profile</Link>
                     {data.canPost ? (
@@ -25,14 +26,15 @@ const DashRoot = () => {
                     <Link to='/dash/comments'>My Comments</Link>
                     <Link to='/dash/settings'>Account Settings</Link>
                 
-            </div>
-            <div>
+            </aside>
+            <div className='dashContent'>
+                <h2>{data.displayname}'s Dash</h2>
                 <Outlet/>
             </div>
         
         
         
-        </>
+        </div>
 
     )
 }

@@ -1,0 +1,49 @@
+.bioCtr {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.bio {
+  background-color: var(--color-surface-light);
+  width: 50%;
+  border: 1px solid white;
+  border-radius: var(--radius-md);
+  box-shadow: 0 0 4px white;
+  padding: var(--space-sm);
+  min-height: var(--space-xl);
+}
+
+.bio p {
+  color: var(--color-text);
+}
+
+h3 {
+  font-size: var(--text-xl);
+  padding: var(--space-md);
+}
+
+.recentsCtr {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.recents {
+  background-color: var(--color-surface-light);
+  border: 1px solid white;
+  width: 50%;
+  border-radius: var(--radius-md);
+  box-shadow: 0 0 4px white;
+}
+
+.recents p {
+  color: var(--color-text);
+}
+
+.recents:hover {
+  box-shadow: none;
+  background-color: var(--color-surface);
+  color: var(--color-primary);
+}
