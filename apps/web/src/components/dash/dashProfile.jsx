@@ -1,5 +1,6 @@
 import {useLoaderData, Link} from 'react-router';
-import '../../styles/dashboard/dashProfile.css'
+import '../../styles/dashboard/dashProfile.css';
+
 const DashProfile = () => {
     const data = useLoaderData();
     const profile = data.profile;
@@ -23,7 +24,7 @@ return (
                     : (profile.posts.map((post) => (
                         
                             <Link key={post.id} className='recents' to={`/blog/${post.id}`} >
-                                <p>{post.title} </p>
+                                <p className='postTitle' >{post.title} </p>
                                 <p>{new Date(post.publishedAt).toLocaleDateString()}</p>
                             </Link>
                         

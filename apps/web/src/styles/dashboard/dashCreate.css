@@ -1,0 +1,31 @@
+#postForm {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+  align-items: center;
+}
+
+input {
+  width: 40%;
+  text-align: center;
+}
+
+#text {
+  width: 100%;
+  min-height: 20rem;
+  resize: vertical;
+}
+
+#postSubmit {
+  padding: var(--space-md) var(--space-lg);
+  background-color: var(--color-primary);
+  border: 1px solid white;
+  border-radius: var(--radius-sm);
+  box-shadow: 0 0 5px white;
+  color: var(--color-text);
+}
+
+#postSubmit:hover {
+  box-shadow: none;
+  background-color: var(--color-surface-light);
+}

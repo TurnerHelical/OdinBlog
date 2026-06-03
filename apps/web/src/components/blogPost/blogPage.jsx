@@ -1,6 +1,7 @@
 import {useLoaderData, Link, Form, useNavigation, useRouteLoaderData} from 'react-router';
 import {useEffect, useState, useRef} from 'react';
 import { useFormValidation } from '../../hooks/useFormValidation';
+import '../../styles/blogPost.css'
 
 const validateComment = (values) => {
     const newErrors = {text: ''};
@@ -44,7 +45,7 @@ const BlogPage = () => {
             <h2>{post.title}</h2>
             <h4>By {post.user?.displayname ? post.user.displayname : 'Account Deleted'}</h4>
             <div>
-                <p>{post.text}</p>
+                <p className='postContent'>{post.text}</p>
                 <p>{new Date(post.publishedAt).toLocaleDateString()}</p>
             </div>
             <div>
