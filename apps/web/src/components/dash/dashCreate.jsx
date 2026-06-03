@@ -65,7 +65,7 @@ const DashCreate = () => {
                 {postForm.touched.text && postForm.errors.text && (
                     <p>{postForm.errors.text}</p>
                 )}
-                <button type='submit' disabled={isSubmitting} >{isSubmitting ? 'Creating...' : 'Submit'}</button> 
+                <button id= 'postSubmit'type='submit' disabled={isSubmitting} >{isSubmitting ? 'Creating...' : 'Submit'}</button> 
             </Form>
         
         

@@ -5,7 +5,7 @@
   align-items: center;
 }
 
-input {
+#title {
   width: 40%;
   text-align: center;
 }
@@ -28,4 +28,10 @@ input {
 #postSubmit:hover {
   box-shadow: none;
   background-color: var(--color-surface-light);
+}
+
+@media (width <= 1024px) {
+  #text {
+    width: 75%;
+  }
 }
