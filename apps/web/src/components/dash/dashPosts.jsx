@@ -11,9 +11,9 @@ const DashPosts = () => {
                     <div className='postCtrDash'>
                         {data.items.length > 0 
                         ?(data.items.map(post => (
-                            <div key={post.id} className='postCardDash' >
+                            <div key={post.id} className='cardDash' >
                                 
-                                <Link className='postTitleDash' to={`/blog/${post.id}`}>{post.title}</Link>
+                                <Link className='titleDash postTitle' to={`/blog/${post.id}`}>{post.title}</Link>
                                 <Link className='editPostDash' to={`/dash/editPost/${post.id}`}>Edit Post</Link>
                             </div>
                         )))

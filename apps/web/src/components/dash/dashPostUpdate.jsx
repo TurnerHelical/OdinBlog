@@ -1,14 +1,44 @@
-import {useLoaderData, Form} from 'react-router';
+import {useLoaderData, Form, useActionData, useNavigation} from 'react-router';
+import {useFormValidation} from '../../hooks/useFormValidation';
+import {validatePost} from '../dash/dashCreate';
 import {useState} from 'react';
+import '../../styles/dashboard/dashCreate.css';
 
 const PostUpdate = () => {
     const data = useLoaderData();
     const [dangerZone, setDangerZone] = useState(false);
+    const actionData = useActionData();
+    const navigation = useNavigation();
+    const postForm = useFormValidation({
+        title: data.title, 
+        text: data.text},
+        validatePost
+    );
+    const isSubmitting = navigation.state !== 'idle';
+    const postServerError = actionData?.message;
     return (
         <>
-            <Form action={`/dash/editPost/${data.id}`} method='patch'>
-                <input name='title' id='title' defaultValue={data.title}></input>
-                <textarea rows='10' cols='75'name='text' id='text' defaultValue={data.text}></textarea>
+            <Form id='postForm' action={`/dash/editPost/${data.id}`} method='patch' onSubmit={postForm.handleSubmit}>
+                <h2>Edit Post</h2>
+                {postServerError && <p>{postServerError}</p>}
+                <input name='title' 
+                    id='title' 
+                    defaultValue={data.title}
+                    onChange={postForm.handleChange}
+                    onBlur={postForm.handleBlur}
+                />
+                {postForm.touched.title && postForm.errors.title && (
+                    <p>{postForm.errors.title}</p>
+                )}
+                <textarea 
+                name='text' 
+                id='text' 
+                defaultValue={data.text}
+                onChange={postForm.handleChange}
+                onBlur={postForm.handleBlur}/>
+                {postForm.touched.text && postForm.errors.text && (
+                    <p>{postForm.errors.text}</p>
+                )}
                 {data.published ? (
                     <div>
                         <p>Would you like to take this post down?</p>
@@ -27,16 +57,16 @@ const PostUpdate = () => {
                         <label htmlFor='publishFalse'>No</label>
                     </div>
                 )}
-                <button type='submit' name='intent' value='edit'>Submit</button>
+                <button id='postSubmit' type='submit' name='intent' value='edit' disabled={isSubmitting} >{isSubmitting ? 'Creating...' : 'Submit'}</button> 
             </Form>
-
-            <button onClick={() => setDangerZone(previous => !previous)}>DANGER ZONE</button>
-            {!dangerZone 
-            ? ('')
-            :(<Form action={`/dash/editPost/${data.id}`} method='delete'>
-                <button type='submit' name='intent' value='delete'>Delete this post</button>
-            </Form>)}
-        
+            <div id='dangerBox'>
+                <button className='dangerBtn' onClick={() => setDangerZone(previous => !previous)}>DANGER ZONE</button>
+                {!dangerZone 
+                ? ('')
+                :(<Form action={`/dash/editPost/${data.id}`} method='delete'>
+                    <button className='dangerBtn confirmDelete' type='submit' name='intent' value='delete'>Delete this post</button>
+                </Form>)}
+            </div>
         </>
     )
 }

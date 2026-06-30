@@ -11,10 +11,10 @@ const DashDrafts = () => {
                 {data.items.length > 0 
                 ?(data.items.map(post => (
 
-                    <Link className='postCardDash' key={post.id} to={`/dash/editPost/${post.id}`}>
+                    <Link className='cardDash draftCard' key={post.id} to={`/dash/editPost/${post.id}`}>
                         
-                            <h3 className='postTitleDash'>{post.title}</h3>
-                            <p className='editPostDash'>{new Date(post.createdAt).toLocaleDateString()}</p>
+                            <h3 className='titleDash'>{post.title}</h3>
+                            <p className='dateCreated'>{new Date(post.createdAt).toLocaleDateString()}</p>
                         
                     </Link>
                 )))

@@ -4,7 +4,7 @@
   align-items: center;
 }
 
-.postCardDash {
+.cardDash {
   display: grid;
   grid-template: 1fr / 1fr 1fr;
   margin: var(--space-md) 0;
@@ -15,7 +15,7 @@
   width: 75%;
 }
 
-.postTitleDash {
+.titleDash {
   border-right: 1px solid white;
   padding: var(--space-sm) var(--space-sm);
   white-space: nowrap;
@@ -29,13 +29,25 @@
   color: var(--color-text);
 }
 
-.postTitleDash:hover {
+.dateCreated {
+  border-left: 1px solid white;
+  padding: var(--space-sm) var(--space-sm);
+  color: var(--color-text);
+}
+
+.postTitle:hover {
   background-color: var(--color-surface);
   color: var(--color-text-muted);
   border-radius: var(--radius-sm);
 }
 
 .editPostDash:hover {
+  background-color: var(--color-surface);
+  color: var(--color-text-muted);
+  border-radius: var(--radius-sm);
+}
+
+.draftCard:hover {
   background-color: var(--color-surface);
   color: var(--color-text-muted);
   border-radius: var(--radius-sm);

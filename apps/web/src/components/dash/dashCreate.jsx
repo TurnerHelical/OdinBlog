@@ -72,4 +72,4 @@ const DashCreate = () => {
     )
 }
 
-export {DashCreate};
+export {DashCreate, validatePost};

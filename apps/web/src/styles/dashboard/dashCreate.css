@@ -30,6 +30,32 @@
   background-color: var(--color-surface-light);
 }
 
+#dangerBox {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-sm);
+  margin-top: var(--space-md);
+}
+
+.dangerBtn {
+  padding: var(--space-md) var(--space-lg);
+  background-color: var(--color-danger);
+  border: 1px solid white;
+  border-radius: var(--radius-sm);
+  box-shadow: 0 0 5px white;
+  color: var(--color-text);
+}
+
+.dangerBtn:hover {
+  box-shadow: none;
+  background-color: var(--color-surface-light);
+}
+
+.confirmDelete {
+  background-color: rgb(116, 19, 19);
+}
+
 @media (width <= 1024px) {
   #text {
     width: 75%;
