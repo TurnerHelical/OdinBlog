@@ -5,7 +5,7 @@ async function commentUpdate({ request, params }) {
     const commentId = params.commentId
     const fd = await request.formData();
     const data = Object.fromEntries(fd);
-
+    console.log(data)
     if (data.intent === 'edit') {
         const newText = {
             updatedText: data.commentText,

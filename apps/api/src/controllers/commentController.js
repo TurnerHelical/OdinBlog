@@ -80,6 +80,7 @@ async function updateComment(req, res, next) {
             return res.status(400).json({ message: "Invalid comment id" });
         };
         const text = String(req.body.updatedText ?? "").trim();
+
         if (!text) {
             return res.status(400).json({ message: "Missing comment text" });
         }

@@ -1,33 +1,27 @@
-#postForm {
+#editForm {
   display: flex;
   flex-direction: column;
-  gap: var(--space-lg);
   align-items: center;
+  gap: var(--space-md);
 }
 
-#title {
-  width: 40%;
-  text-align: center;
-}
-
-#text {
-  width: 100%;
-  min-height: 20rem;
+#commentText {
   resize: vertical;
+  min-height: 10rem;
 }
 
-#postSubmit {
+.dates {
+  display: grid;
+  grid-template: 1fr/ 1fr 1fr;
+}
+
+.updateBtn {
   padding: var(--space-md) var(--space-lg);
   background-color: var(--color-primary);
   border: 1px solid white;
   border-radius: var(--radius-sm);
   box-shadow: 0 0 5px white;
   color: var(--color-text);
-}
-
-#postSubmit:hover {
-  box-shadow: none;
-  background-color: var(--color-surface-light);
 }
 
 #dangerBox {
@@ -54,22 +48,4 @@
 
 .confirmDelete {
   background-color: rgb(116, 19, 19);
-}
-
-.radioBox {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: var(--space-md);
-}
-
-.radioOption {
-  display: flex;
-  gap: var(--space-sm);
-}
-
-@media (width <= 1024px) {
-  #text {
-    width: 75%;
-  }
 }

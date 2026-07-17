@@ -2,7 +2,7 @@ import { body } from 'express-validator';
 import { containsBlockedWord } from '../moderation/containsBlockedWord.js';
 
 const commentValidation = [
-    body('text')
+    body('updatedText')
         .trim()
         .isLength({ min: 1, max: 300 })
         .withMessage('Comment must be between 1 and 300 characters')

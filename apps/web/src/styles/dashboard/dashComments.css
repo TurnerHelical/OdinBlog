@@ -1,0 +1,36 @@
+.commentCard {
+  display: grid;
+  grid-template: 1fr / 1fr 1fr 1fr;
+  background-color: var(--color-surface-light);
+  border: 1px solid white;
+  border-radius: var(--radius-sm);
+  box-shadow: 0 0 5px white;
+  width: 75%;
+  padding: var(--space-sm);
+}
+
+.postLink p {
+  color: var(--color-text);
+}
+
+.postLink {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.commentCtr {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  align-items: center;
+  color: var(--color-text);
+}
+
+.postLink p:hover {
+  color: var(--color-text-muted);
+}
+
+.editComment:hover {
+  color: var(--color-text-muted);
+}

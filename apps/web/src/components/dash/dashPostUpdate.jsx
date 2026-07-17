@@ -42,19 +42,33 @@ const PostUpdate = () => {
                 {data.published ? (
                     <div>
                         <p>Would you like to take this post down?</p>
-                        <input type='radio' name='unpublish' value='true' id='unpublishTrue'></input>
-                        <label htmlFor='publishTrue'>Yes</label>
-                        <input type='radio' name='unpublish' value='false' id='unpublishFalse' defaultChecked></input>
-                        <label htmlFor='publishFalse'>No</label>
+                        <div className='radioBox'>
+                                <div className='radioOption'>
+                                    <input type='radio' name='unpublish' value='true' id='unpublishTrue'></input>
+                                    <label htmlFor='publishTrue'>Yes</label>
+                                </div>
+
+                                <div className='radioOption'>
+                                    <input type='radio' name='unpublish' value='false' id='unpublishFalse' defaultChecked></input>
+                                    <label htmlFor='publishFalse'>No</label>
+                                </div>
+                            </div>
                     </div>
                 ) 
                 :(
                     <div>
                         <p>Would you like to publish this blog post?</p>
-                        <input type='radio' name='publish' value='true' id='publishTrue'></input>
-                        <label htmlFor='publishTrue'>Yes</label>
-                        <input type='radio' name='publish' value='false' id='publishFalse' defaultChecked></input>
-                        <label htmlFor='publishFalse'>No</label>
+                        <div className='radioBox'>
+                            <div className='radioOption'>
+                                <input type='radio' name='publish' value='true' id='publishTrue'></input>
+                                <label htmlFor='publishTrue'>Yes</label>
+                            </div>
+
+                            <div className='radioOption'>
+                                <input type='radio' name='publish' value='false' id='publishFalse' defaultChecked></input>
+                                <label htmlFor='publishFalse'>No</label>
+                            </div>
+                        </div>
                     </div>
                 )}
                 <button id='postSubmit' type='submit' name='intent' value='edit' disabled={isSubmitting} >{isSubmitting ? 'Creating...' : 'Submit'}</button> 

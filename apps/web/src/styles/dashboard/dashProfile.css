@@ -26,7 +26,7 @@ h3 {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: var(--space-sm);
+  gap: var(--space-md);
 }
 
 .recents {
@@ -35,10 +35,19 @@ h3 {
   width: 50%;
   border-radius: var(--radius-md);
   box-shadow: 0 0 4px white;
+  display: grid;
+  grid-template: 1fr / 1fr 1fr;
+  padding: var(--space-sm);
 }
 
 .recents p {
   color: var(--color-text);
+}
+
+.commentText {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .recents:hover {

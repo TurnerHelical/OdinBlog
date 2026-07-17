@@ -42,9 +42,8 @@ return (
                     : (profile.comments.map((comment) => (
                         
                             <Link className='recents' key={comment.id}to={`/blog/${comment.postId}`}>
-                                <p>{comment.text}</p>
+                                <p className='commentText'>{comment.text}</p>
                                 <p>{new Date(comment.createdAt).toLocaleDateString()}</p>
-                                <p>{comment.updatedAt !== null ? (`${(new Date(comment.updatedAt).toLocaleDateString())}`):('')}</p>
                             </Link>
                         
                     )))}

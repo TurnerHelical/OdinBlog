@@ -71,7 +71,7 @@ async function api({ url, options = {} }) {
         ...(body !== undefined ? { body: JSON.stringify(body) } : {}),
     };
 
-
+    console.log(body);
     let res = await fetch(url.startsWith('http') ? url : `${API_BASE}${url}`, requestInit);
 
 
