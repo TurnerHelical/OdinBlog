@@ -46,6 +46,11 @@
   background-color: var(--color-surface-light);
 }
 
+.updateBtn:hover {
+  box-shadow: none;
+  background-color: var(--color-surface-light);
+}
+
 .confirmDelete {
   background-color: rgb(116, 19, 19);
 }
