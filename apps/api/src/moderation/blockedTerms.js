@@ -7,5 +7,5 @@ export const reservedNames = [
 ];
 
 export const spamTerms = [
-
+    'test'
 ];

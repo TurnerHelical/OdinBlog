@@ -10,8 +10,8 @@ const PostUpdate = () => {
     const actionData = useActionData();
     const navigation = useNavigation();
     const postForm = useFormValidation({
-        title: data.title, 
-        text: data.text},
+        title: actionData?.values.title ?? data.title, 
+        text: actionData?.values.text ?? data.text},
         validatePost
     );
     const isSubmitting = navigation.state !== 'idle';

@@ -8,10 +8,15 @@ async function postCreate({ request }) {
         await api({ url: '/posts', options: { method: 'POST', body: data } });
         return redirect('/dash/drafts');
     } catch (error) {
+        const validationErrors = error.data?.errors;
+
+        const message = validationErrors?.length
+            ? validationErrors.map((validationError) => validationError.msg).join(' ')
+            : error.message;
         return {
-            ok: false,
-            status: error.status,
-            message: error.message || 'Request failed',
+
+            status: error.status ?? 500,
+            message,
             values: data,
         }
     }

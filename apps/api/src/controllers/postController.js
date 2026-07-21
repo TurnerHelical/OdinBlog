@@ -45,8 +45,8 @@ async function createPost(req, res, next) {
 
         await prisma.post.create({
             data: {
-                title: req.body.title,
-                text: req.body.text,
+                title,
+                text,
                 userId: req.user.id,
             },
         });
@@ -54,7 +54,9 @@ async function createPost(req, res, next) {
             message: 'Post added to drafts. Please confirm you\'re finished and then hit publish',
         });
     } catch (err) {
-        return next(err);
+        return res.status(500).json({
+            message: 'We could not save your draft. Please try again in a moment.'
+        });
     }
 };
 

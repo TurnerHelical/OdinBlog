@@ -99,4 +99,4 @@ const BlogPage = () => {
     )
 }
 
-export {BlogPage};
+export {BlogPage, validateComment};

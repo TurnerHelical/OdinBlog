@@ -71,7 +71,6 @@ async function api({ url, options = {} }) {
         ...(body !== undefined ? { body: JSON.stringify(body) } : {}),
     };
 
-    console.log(body);
     let res = await fetch(url.startsWith('http') ? url : `${API_BASE}${url}`, requestInit);
 
 
@@ -88,14 +87,19 @@ async function api({ url, options = {} }) {
     }
 
     if (!res.ok) {
-        let errorPayload = null;
+        const responseText = await res.text();
+
+        let errorPayload;
+
         try {
-            errorPayload = await res.json();
+            errorPayload = responseText
+                ? JSON.parse(responseText)
+                : {};
         } catch {
-            errorPayload = { message: await res.text().catch(() => 'Request failed') };
+            errorPayload = { message: responseText };
         }
 
-        const err = new Error(errorPayload?.message || 'Request failed');
+        const err = new Error(errorPayload?.message || 'The request could not be completed.');
         err.status = res.status;
         err.data = errorPayload;
         throw err;
