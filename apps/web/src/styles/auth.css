@@ -1,0 +1,24 @@
+.authPageBox {
+  margin-top: var(--space-xl);
+  display: grid;
+  grid-template: 1fr / 1fr 1fr;
+  gap: var(--space-sm);
+}
+
+.loggedIn {
+}
+
+.formCtr {
+  background-color: var(--color-surface-light);
+  border: 1px solid white;
+  border-radius: var(--radius-md);
+  box-shadow: 0 0 5px white;
+  text-align: center;
+}
+
+.loginInput {
+  padding: var(--space-sm) var(--space-md);
+  display: grid;
+  grid-template: 1fr / 0.5fr 1fr;
+  align-items: center;
+}

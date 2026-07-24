@@ -8,7 +8,7 @@ async function commentUpdate({ request, params }) {
     try {
         if (data.intent === 'edit') {
             const newText = {
-                updatedText: data.commentText,
+                text: data.commentText,
             }
             await api({ url: `/comments/${commentId}`, options: { method: 'PATCH', body: newText } });
             return redirect('/dash/comments');

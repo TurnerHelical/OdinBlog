@@ -42,59 +42,60 @@ const BlogPage = () => {
 
     return (
         <>
-            <h2>{post.title}</h2>
-            <h4>By {post.user?.displayname ? post.user.displayname : 'Account Deleted'}</h4>
-            <div>
-                <p className='postContent'>{post.text}</p>
-                <p>{new Date(post.publishedAt).toLocaleDateString()}</p>
-            </div>
-            <div>
-                <button onClick={() => setCommentOpen(previous => !previous)}>{(commentOpen ? 'Close comment box' : 'New comment')}</button>
-                {commentOpen ?
-                (<div>
-                    {!user ? (<p>Please login before commenting!</p>)
-                    :<Form action={`/blog/${post.id}`} method='post' onSubmit={commentForm.handleSubmit}>
-                        <textarea name='text' id='text' placeholder='Enter Comment Text' value={commentForm.values.text} onChange={commentForm.handleChange} onBlur={commentForm.handleBlur}/>
-                        <p>{commentForm.values.text.length}/500</p>
-                        <input type='hidden' name='postId' value={post.id}></input>
-                        <button type='submit' disabled={navigation.state !== 'idle'}>{navigation.state === 'submitting' ? 'Posting....' : 'Post Comment'}</button>
-                        {commentForm.touched.text && commentForm.errors.text && (
-                        <p>{commentForm.errors.text}</p>
-                    )}
-                    </Form>}
+            <div className='blogPage'>
+                <div className='blogTitle'>
+                    <h2>{post.title}</h2>
+                    <h4>By {post.user?.displayname ? post.user.displayname : 'Account Deleted'}</h4>
+                    <p>{new Date(post.publishedAt).toLocaleDateString()}</p>
+                </div>
+                
+                <div className='postBox'>
+                    <p className='postContent'>{post.text}</p>
+                </div>
+
+                <div className='commentBox'>
+                    <h3>Comments</h3>
+                    <button className='btn btn-primary commentBtn' onClick={() => setCommentOpen(previous => !previous)}>{(commentOpen ? 'Close comment box' : 'New comment')}</button>
+                    {commentOpen ?
+                    (<div className='newComment'>
+                        {!user ? (<p>Please login before commenting!</p>)
+                        :<Form className='commentForm' action={`/blog/${post.id}`} method='post' onSubmit={commentForm.handleSubmit}>
+                            <textarea name='text' id='text' placeholder='Enter Comment Text' value={commentForm.values.text} onChange={commentForm.handleChange} onBlur={commentForm.handleBlur}/>
+                            <p>{commentForm.values.text.length}/500</p>
+                            <input type='hidden' name='postId' value={post.id}></input>
+                            <button className='btn btn-primary' type='submit' disabled={navigation.state !== 'idle'}>{navigation.state === 'submitting' ? 'Posting....' : 'Post Comment'}</button>
+                            {commentForm.touched.text && commentForm.errors.text && (
+                            <p>{commentForm.errors.text}</p>
+                        )}
+                        </Form>}
+                        
+                    </div>)
+                    : ('')
+                    }
                     
-                </div>)
-                : ('')
-                }
-                
-            </div>
-            <div>
-                
-                <h3>Comments</h3>
-                {post.comments.length > 0 
-                ? ( post.comments.map(comment => (
-                    <div key={comment.id}>
-                        {comment.user 
-                        ? <><Link to={`/user/${comment.user.id}`}>{comment.user.displayname}</Link>
-                            <p>{comment.text}</p>
-                            </>
-                        : <><p>Account Deleted</p>
-                            <p>{comment.text}</p> </>}
-                        {user.id === comment.user?.id 
-                        ? (<Link to={`/dash/editComment/${comment.id}`}>Edit Comment</Link>)
-                        : ('')
-                        }
-                    </div>
-                )))
-                : (<div>
-                    <p>No Comments yet. Be the first!</p>
-                </div>)}
-                
-                
-                <div>
+                    {post.comments.length > 0 
+                    ? ( post.comments.map(comment => (
+                        <div key={comment.id} className='blogCommentCard'>
+                            {comment.user 
+                            ? <><Link className='blogCommentText commentUser' to={`/user/${comment.user.id}`}>{comment.user.displayname}</Link>
+                                <p className='blogCommentText'>{comment.text}</p>
+                                </>
+                            : <><p className='blogCommentText commentUser'>Account Deleted</p>
+                                <p className='blogCommentText'>{comment.text}</p> </>}
+                            {user?.id === comment.user?.id 
+                            ? (<Link to={`/dash/editComment/${comment.id}`} className='editComment'>Edit Comment</Link>)
+                            : ('')
+                            }
+                        </div>
+                    )))
+                    : (<div>
+                        <p>No Comments yet. Be the first!</p>
+                    </div>)}
 
                 </div>
+
             </div>
+            
         </>
     )
 }
