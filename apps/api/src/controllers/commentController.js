@@ -79,7 +79,7 @@ async function updateComment(req, res, next) {
         if (!Number.isInteger(commentId) || commentId <= 0) {
             return res.status(400).json({ message: "Invalid comment id" });
         };
-        const text = String(req.body.updatedText ?? "").trim();
+        const text = String(req.body.text ?? "").trim();
 
         if (!text) {
             return res.status(400).json({ message: "Missing comment text" });
