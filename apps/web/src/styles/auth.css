@@ -2,11 +2,11 @@
   margin-top: var(--space-xl);
   display: grid;
   grid-template: 1fr / 1fr 1fr;
-  gap: var(--space-sm);
+  gap: var(--space-lg);
+  width: 100%;
 }
 
-.loggedIn {
-}
+
 
 .formCtr {
   background-color: var(--color-surface-light);
@@ -14,11 +14,27 @@
   border-radius: var(--radius-md);
   box-shadow: 0 0 5px white;
   text-align: center;
+  padding-bottom: var(--space-md);
+  
 }
+
+
 
 .loginInput {
   padding: var(--space-sm) var(--space-md);
   display: grid;
   grid-template: 1fr / 0.5fr 1fr;
   align-items: center;
+}
+
+@media (width <= 1024px) {
+  .authPageBox {
+    grid-template: 1fr 1fr/ 1fr;
+    margin: var(--space-xl) var(--space-lg)
+    
+  }
+
+  .formCtr {
+    height: fit-content;
+  }
 }
