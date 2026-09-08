@@ -21,6 +21,7 @@ async function settingsAction({ request }) {
                 hasRequested: true,
                 postRequest: data.postRequest
             }
+            console.log(updatedData);
             await api({ url: `/users/${user.id}`, options: { method: 'PATCH', body: updatedData } });
             return redirect('/dash/settings');
         }

@@ -187,6 +187,7 @@ async function getUserProfile(req, res, next) {
 };
 
 async function updateUserProfile(req, res, next) {
+    
     try {
         if (!req.user) return res.status(401).json({ message: 'Unauthorized' });
 
@@ -232,6 +233,7 @@ async function updateUserProfile(req, res, next) {
         if (requestPostAbility) {
             const hasRequested = req.body.hasRequested ?? '';
             const postRequest = req.body.postRequest ?? '';
+            
 
             if (hasRequested && !postRequest) return res.status(400).json({ message: 'Please include a reason you want access' });
             if (hasRequested && postRequest) {
