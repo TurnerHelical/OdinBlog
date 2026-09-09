@@ -14,6 +14,27 @@ const validateComment = (values) => {
     return newErrors;
 }
 
+function linkifyText(text) {
+    const urlRegex = /(https?:\/\/[^\s]+)/g;
+
+    return text.split(urlRegex).map((part, index) => {
+        if (urlRegex.test(part)) {
+            return (
+                <a
+                    key={index}
+                    href={part}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    {part}
+                </a>
+            );
+        }
+
+        return part;
+    });
+}
+
 const BlogPage = () => {
     const post = useLoaderData();
     const navigation = useNavigation();
@@ -50,7 +71,7 @@ const BlogPage = () => {
                 </div>
                 
                 <div className='postBox'>
-                    <p className='postContent'>{post.text}</p>
+                    <p className='postContent'>{linkifyText(post.text)}</p>
                 </div>
 
                 <div className='commentBox'>

@@ -24,6 +24,8 @@
 .postContent {
   color: var(--color-text);
   max-width: 75vw;
+  white-space: pre-wrap;
+  line-height: 1.7;
 }
 
 .commentBox {
