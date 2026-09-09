@@ -19,7 +19,7 @@ return (
                 <h3>Recent Posts</h3>
                 
                     {!profile.posts.length > 0 
-                    ? (<div className='recents'><p>No posts yet</p></div>)                  
+                    ? (<p className='recents empty'>No posts yet</p>)                  
                     
                     : (profile.posts.map((post) => (
                         
@@ -36,9 +36,9 @@ return (
                 <h3>Recent Comments</h3>
                 
                     {!profile.comments.length > 0 
-                    ? ( <div className='recents'>
-                        <p>No comments yet</p>               
-                        </div>)
+                    ? ( 
+                        <p className='recents empty'>No comments yet</p>               
+                        )
                     : (profile.comments.map((comment) => (
                         
                             <Link className='recents' key={comment.id}to={`/blog/${comment.postId}`}>

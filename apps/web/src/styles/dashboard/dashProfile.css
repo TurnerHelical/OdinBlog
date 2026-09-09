@@ -38,6 +38,11 @@ h3 {
   display: grid;
   grid-template: 1fr / 1fr 1fr;
   padding: var(--space-sm);
+  text-align: center;
+}
+
+.recents.empty {
+  display: block;
 }
 
 .recents p {
@@ -54,6 +59,12 @@ h3 {
   box-shadow: none;
   background-color: var(--color-surface);
   color: var(--color-primary);
+}
+
+.recents.empty:hover {
+  box-shadow: 0 0 4px white;
+  background-color: var(--color-surface-light);
+  color: var(--color-text-muted);
 }
 
 .postTitle {

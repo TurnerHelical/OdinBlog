@@ -110,30 +110,31 @@ const Auth = () => {
             <div className="formCtr">
               {loginServerError && <p>{loginServerError}</p>}
 
-              <Form
+              <Form 
                 action="/auth"
                 method="post"
                 onSubmit={loginForm.handleSubmit}
               >
                 <h2>Login</h2>
+                
                 <div className="loginInput">
-                    <label for='email' >Email: </label>
-                    <input
-                        name="email"
-                        id="loginEmail"
-                        value={loginForm.values.email}
-                        onChange={loginForm.handleChange}
-                        onBlur={loginForm.handleBlur}
-                        type="email"
-                        placeholder="Email"
-                    />
-                    {loginForm.touched.email && loginForm.errors.email && (
-                        <p>{loginForm.errors.email}</p>
-                    )}
+                  <label for='email' >Email: </label>
+                  <input
+                    name="email"
+                    id="loginEmail"
+                    value={loginForm.values.email}
+                    onChange={loginForm.handleChange}
+                    onBlur={loginForm.handleBlur}
+                    type="email"
+                    placeholder="Email"
+                  />
+                  {loginForm.touched.email && loginForm.errors.email && (
+                    <p>{loginForm.errors.email}</p>
+                  )}
                 </div>
 
-                <div  className="loginInput">
-                    <label for='password'>Password: </label>
+                <div className="loginInput">
+                  <label for='password'>Password: </label>
                   <input
                     name="password"
                     id="loginPassword"
@@ -155,6 +156,7 @@ const Auth = () => {
                 >
                   {isSubmitting ? "Logging In..." : "Login"}
                 </button>
+                
               </Form>
             </div>
 
@@ -166,58 +168,72 @@ const Auth = () => {
                 onSubmit={registerForm.handleSubmit}
               >
                 <h2>Register</h2>
-                <input
-                  name="displayname"
-                  id="displayname"
-                  value={registerForm.values.displayname}
-                  onChange={registerForm.handleChange}
-                  onBlur={registerForm.handleBlur}
-                  placeholder="Username"
-                  type="text"
-                />
-                {registerForm.touched.displayname &&
-                  registerForm.errors.displayname && (
-                    <p>{registerForm.errors.displayname}</p>
+                <div className="loginInput">
+                  <label for='displayname'>Username: </label>
+                  <input
+                    name="displayname"
+                    id="displayname"
+                    value={registerForm.values.displayname}
+                    onChange={registerForm.handleChange}
+                    onBlur={registerForm.handleBlur}
+                    placeholder="Username"
+                    type="text"
+                  />
+                  {registerForm.touched.displayname &&
+                    registerForm.errors.displayname && (
+                      <p>{registerForm.errors.displayname}</p>
+                    )}
+                </div>
+
+                <div className="loginInput">
+                  <label for='email'>Email: </label>
+                  <input
+                    name="email"
+                    id="registerEmail"
+                    placeholder="Email Address"
+                    type="email"
+                    value={registerForm.values.email}
+                    onChange={registerForm.handleChange}
+                    onBlur={registerForm.handleBlur}
+                  />
+                  {registerForm.touched.email && registerForm.errors.email && (
+                    <p>{registerForm.errors.email}</p>
                   )}
-                <input
-                  name="email"
-                  id="registerEmail"
-                  placeholder="Email Address"
-                  type="email"
-                  value={registerForm.values.email}
-                  onChange={registerForm.handleChange}
-                  onBlur={registerForm.handleBlur}
-                />
-                {registerForm.touched.email && registerForm.errors.email && (
-                  <p>{registerForm.errors.email}</p>
-                )}
-                <input
-                  name="password"
-                  id="registerPassword"
-                  placeholder="Password"
-                  type="password"
-                  value={registerForm.values.password}
-                  onChange={registerForm.handleChange}
-                  onBlur={registerForm.handleBlur}
-                />
-                {registerForm.touched.password &&
-                  registerForm.errors.password && (
-                    <p>{registerForm.errors.password}</p>
-                  )}
-                <input
-                  name="confirmPassword"
-                  id="confirmPassword"
-                  placeholder="Confirm Password"
-                  type="password"
-                  value={registerForm.values.confirmPassword}
-                  onChange={registerForm.handleChange}
-                  onBlur={registerForm.handleBlur}
-                />
-                {registerForm.touched.confirmPassword &&
-                  registerForm.errors.confirmPassword && (
-                    <p>{registerForm.errors.confirmPassword}</p>
-                  )}
+                </div>
+                <div className='loginInput'>
+                  <label for='password'>Password: </label>
+                  <input
+                    name="password"
+                    id="registerPassword"
+                    placeholder="Password"
+                    type="password"
+                    value={registerForm.values.password}
+                    onChange={registerForm.handleChange}
+                    onBlur={registerForm.handleBlur}
+                  />
+                  {registerForm.touched.password &&
+                    registerForm.errors.password && (
+                      <p>{registerForm.errors.password}</p>
+                    )}
+                </div>
+                <div className="loginInput">
+                  <label for='confirmPassword'>Password Again: </label>
+                  <input
+                    name="confirmPassword"
+                    id="confirmPassword"
+                    placeholder="Confirm Password"
+                    type="password"
+                    value={registerForm.values.confirmPassword}
+                    onChange={registerForm.handleChange}
+                    onBlur={registerForm.handleBlur}
+                  />
+                  {registerForm.touched.confirmPassword &&
+                    registerForm.errors.confirmPassword && (
+                      <p>{registerForm.errors.confirmPassword}</p>
+                    )}
+                </div>
                 <button
+                  className="btn btn-primary"
                   type="submit"
                   name="intent"
                   value="register"

@@ -49,7 +49,7 @@ const DashSettings = () => {
                     <Form action='/dash/settings' method='post' className='settingsForm'>
                         <label>Send a message to an admin explaining why you need post access:</label>
                         <textarea name='postRequest' id='postRequest'/>
-                        <button className='settingsBtn confirmBtn' name='intent' value='requestPost'>Request Access</button>
+                        <button className='settingsBtn confirmBtn' type='submit' name='intent' value='requestPost'>Request Access</button>
                     </Form>
                 )  
             }
