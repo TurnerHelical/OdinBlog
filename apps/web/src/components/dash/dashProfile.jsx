@@ -19,7 +19,7 @@ return (
                 <h3>Recent Posts</h3>
                 
                     {!profile.posts.length > 0 
-                    ? (<div ><p className='recents'>No posts yet</p></div>)                  
+                    ? (<div className='recents'><p>No posts yet</p></div>)                  
                     
                     : (profile.posts.map((post) => (
                         

@@ -2,6 +2,14 @@ import bcrypt from 'bcrypt';
 import { prisma } from '../lib/prisma.js';
 import auth from '../auth/jwt.js';
 
+const refreshCookieOptions = {
+    httpOnly: true,
+    secure: process.env.COOKIE_SECURE === 'true',
+    sameSite: 'lax',
+    path: '/',
+    maxAge: 30 * 24 * 60 * 60 * 1000,
+};
+
 async function register(req, res, next) {
     try {
         const { email, password, displayname } = req.body;
@@ -34,13 +42,7 @@ async function register(req, res, next) {
         const refreshToken = auth.signRefreshToken(payload);
 
 
-        res.cookie("refreshToken", refreshToken, {
-            httpOnly: true,
-            secure: false,
-            sameSite: "lax",
-            path: "/auth/refresh",
-            maxAge: 30 * 24 * 60 * 60 * 1000,
-        });
+        res.cookie("refreshToken", refreshToken, refreshCookieOptions);
 
         return res.status(201).json({
             accessToken,
@@ -78,13 +80,7 @@ async function login(req, res, next) {
         const accessToken = auth.signAccessToken(payload);
         const refreshToken = auth.signRefreshToken(payload);
 
-        res.cookie('refreshToken', refreshToken, {
-            httpOnly: true,
-            secure: false,
-            sameSite: 'lax',
-            path: '/auth/refresh',
-            maxAge: 30 * 24 * 60 * 60 * 1000,
-        });
+        res.cookie('refreshToken', refreshToken, refreshCookieOptions);
 
         return res.status(200).json({ accessToken });
     } catch (err) {
@@ -112,7 +108,12 @@ async function refresh(req, res) {
 };
 
 async function logout(req, res) {
-    res.clearCookie('refreshToken', { path: '/auth/refresh' });
+    res.clearCookie('refreshToken', {
+        httpOnly: true,
+        secure: process.env.COOKIE_SECURE === 'true',
+        sameSite: 'lax',
+        path: '/',
+});
     return res.status(200).json({ message: 'Logged out' });
 };
 
