@@ -14,7 +14,6 @@
 
 .postBox {
   padding: var(--space-md) var(--space-sm);
-  text-align: center;
   background-color: var(--color-surface-light);
   border: 1px solid black;
   border-radius: var(--radius-sm);
