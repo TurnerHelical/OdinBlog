@@ -92,18 +92,7 @@ const Auth = () => {
       <div className="authPageBox">
         {user ? (
           <div className="loggedIn">
-            <Form action="/auth" method="post">
-              <h2>Already logged in</h2>
-
-              <button
-                type="submit"
-                disabled={isSubmitting}
-                name="intent"
-                value="logout"
-              >
-                {isSubmitting ? "Logging Out...." : "Logout"}
-              </button>
-            </Form>
+            <h2>Already logged in</h2>
           </div>
         ) : (
           <>

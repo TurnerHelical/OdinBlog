@@ -18,7 +18,10 @@
   
 }
 
-
+.loggedIn {
+  grid-area: 1/1/2/3;
+  justify-self: center;
+}
 
 .loginInput {
   padding: var(--space-sm) var(--space-md);
